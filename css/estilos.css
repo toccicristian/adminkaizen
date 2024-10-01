@@ -1,0 +1,45 @@
+h1{
+    display:none;
+}
+
+h2{
+    text-align:center;
+}
+
+.isotipo{
+    text-align:center;
+}
+
+.main-logo{
+    display: block;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+header{
+    margin-bottom:4em;
+}
+
+.form-input{
+    display: block;
+    margin: 0 auto;
+}
+
+.form-button{
+    display: block;
+    margin: 0 auto;
+    margin-top:3em;
+    background-color:white;
+    height:4em;
+    width:6em;
+    border-radius: 10px 10px 10px 10px;
+    
+}
+
+.error-centrado{
+    text-align:center;
+}
+
+.centrado{
+    text-align:center;
+}
