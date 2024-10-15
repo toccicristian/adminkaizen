@@ -6,6 +6,18 @@ h2{
     text-align:center;
 }
 
+h3{
+    display:inline-block;
+    background-image: linear-gradient(to right,white 0%, grey 95%);
+    width:100%;
+    text-align:right;
+    font-style:italic;
+}
+
+ul li{
+    margin:2em 0;
+}
+
 .isotipo{
     text-align:center;
 }
@@ -20,6 +32,12 @@ header{
     margin-bottom:4em;
 }
 
+.mensaje-sistema{
+    display:block;
+    font-style:bold;
+    color:gray;
+}
+
 .form-input{
     display: block;
     margin: 0 auto;
@@ -31,6 +49,17 @@ header{
     margin-top:3em;
     background-color:white;
     height:4em;
+    width:6em;
+    border-radius: 10px 10px 10px 10px;
+    
+}
+
+.inline-form-button{
+    /* display: block; */
+    margin: 0 auto;
+    /* margin-top:3em; */
+    background-color:white;
+    height:2.5em;
     width:6em;
     border-radius: 10px 10px 10px 10px;
     
