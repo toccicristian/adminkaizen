@@ -94,7 +94,7 @@ if(mysqli_num_rows($consulta)!=0){
 					</form>
 				</li>
 				<li>Busqueda de Usuarios
-					<form action="busqueda.php" method="post" >
+					<form target="_blank" action="busqueda.php" method="post" >
 						<input type="text" maxlength=12 placeholder="Nombre de usuario" name="usuario" required />
 						<input class="inline-form-button" type="submit" value="Buscar"/><br />
 					</form>
