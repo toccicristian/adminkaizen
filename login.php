@@ -19,8 +19,14 @@
 <body>
 
 <?php
-$usuario=$_POST['usuario'];
-$password=$_POST['password'];
+
+if (!isset($_SESSION['usuario']) || !isset($_SESSION['password'])){
+	$_SESSION['usuario']=$_POST['usuario'];
+	$_SESSION['password']=$_POST['password'];
+}else{
+	$usuario = $_SESSION['usuario'];
+	$password=md5($_SESSION['password']);	
+}
 
 include("conexion.php");
 
@@ -44,11 +50,16 @@ if(mysqli_num_rows($consulta)!=0){
 		<?php
 		echo "<p>Bienvenid@, ".$_SESSION['nombre']."!</p>";
 		echo "Sus Privilegios son : ".$_SESSION['rol']."<br />";
-		echo "<h3 class='centrado'>DASHBOARD</h3>";
+		echo "<h3 class='centrado'>MENU PRINCIPAL</h3>";
 
 		?>
 		</header>
 		<?php
+
+		if(isset($_SESSION['mensajesistema'])){
+			echo "<p class='mensaje-sistema'>".$_SESSION['mensajesistema']."</p>";
+			unset($_SESSION['mensajesistema']);
+		}
 
 		if($_SESSION['idrol']<mysqli_query($conexion, "SELECT MAX(IdRol) FROM ROL")){
 			echo "GESTION DE USUARIOS:<br />";
@@ -103,14 +114,14 @@ if(mysqli_num_rows($consulta)!=0){
 		// if($_SESSION['idrol']<=5){
 		// 	echo "OPCIONES DE OPERARIO<br />";
 		// }
-		echo "<a href='panel.php'>Panel</a>";	
+		// echo "<a href='panel.php'>Panel</a>";	
 
 }else{
 	?>
 	<p class="error-centrado"><?php echo "No es un usuario registrado"; ?></p>
 	<?php
 	
-	include ("form_registro.php");
+	include ("form_login.php");
 }
 
 ?>

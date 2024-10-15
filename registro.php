@@ -1,3 +1,4 @@
+<?php session_start();?>
 <!doctype html>
 <html>
 <head>
@@ -8,33 +9,45 @@
 <body>
 
 <?php
-	$nombre = $_POST['nombre'];
-	$apellido = $_POST['apellido'];
-	$email = $_POST['email'];
 	$usuario = $_POST['usuario'];
-	$password = md5($_POST['password']);
+	$clave = md5($_POST['clave']);	
+	$email = $_POST['email'];
+	$rol = $_POST['nivel'];
+
 
 /*if(isset($_POST['newsletter'])){
 	$news="si";
 }else{
 	$news="no";
 }*/
-	if ($_POST['newsletter'] === "") {
-		$news="no";
-	} else {
-		$news="si";
-	}
+	// if ($_POST['newsletter'] === "") {
+	// 	$news="no";
+	// } else {
+	// 	$news="si";
+	// }
 
 
 	include("conexion.php");
 
-	$_SESSION['nombre'] = $nombre
+	$consulta=mysqli_query($conexion, "SELECT Nombre FROM USUARIO WHERE Nombre='$usuario'");
+	if(mysqli_num_rows($consulta)==0){
+		$consulta=mysqli_query($conexion, "SELECT * FROM ROL 
+											WHERE Nombre='$rol'");
+		$respuesta=mysqli_fetch_array($consulta);
+		$nivel=$respuesta['IdRol'];
 
-	$consulta = mysqli_query($conexion, "INSERT INTO usuarios (nombre, apellido, email, usuario, password, newsletter) VALUES('$nombre','$apellido','$email', '$usuario', '$password', '$news')");
+		$consulta = mysqli_query($conexion, "INSERT INTO USUARIO (Nombre, Clave, EMail, ROL_IdRol) 
+											VALUES('$usuario','$clave','$email','$nivel')");
+
+		$_SESSION['mensajesistema']="Usuario ".$usuario." registrado!";
+	}else{
+		$_SESSION['mensajesistema']="***El usuario ".$usuario." no se pudo crear porque ya existe.";
+	}
 
 
-	header("Location:form_login.php");
-
+	header("Location:./login.php");
+	exit();
+	
 ?>	
     
 

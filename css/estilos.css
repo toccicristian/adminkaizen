@@ -32,7 +32,11 @@ header{
     margin-bottom:4em;
 }
 
-
+.mensaje-sistema{
+    display:block;
+    font-style:bold;
+    color:gray;
+}
 
 .form-input{
     display: block;
