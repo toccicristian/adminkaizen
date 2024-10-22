@@ -6,23 +6,9 @@ h2{
     text-align:center;
 }
 
-/* h3{
-    display:inline-block;
-    background-image: linear-gradient(to right,white 0%, grey 95%);
-    width:100%;
-    text-align:right;
-    font-style:italic;
-} */
-
 ul li{
     margin:2em 0;
 }
-
-/* .navbar, .navbar .isologo{
-    display:flex;
-    align-items:center;
-    flex-wrap: wrap;
-} */
 
 .navbar{
     display:flex;
@@ -44,10 +30,6 @@ ul li{
 
 .navbar .menu .menu-item:hover{
     text-shadow: 0 0 .65px #333, 0 0 .65px #333;
-    /* color: black; */
-    /* font-weight: 800; */
-    /* text-shadow: black 1px 0 10px; */
-    /* text-shadow: black 2px -2px 0px; */
     transition:0.2s;
 
 }
@@ -66,7 +48,6 @@ ul li{
 .isotipo-index{
     display: inline;
     white-space:nowrap;
-    /* background-color:blue; */
     text-align:center;
     margin-right:1em;
 }
@@ -75,27 +56,11 @@ ul li{
     display: inline;
     margin-left:auto;
     margin-right:auto;
-    /* background-color:red; */
 }
 
 header{
     margin-bottom:4em;
 }
-
-/* .seccion-inicio{
-    margin: 0 4rem;
-    display:flex;
-    flex-wrap:wrap;
-    align-items:center;
-    justify-content: space-around;
-} */
-
-/* article .seccion-inicio {
-
-    display:flex;
-    flex-wrap:nowrap;
-}
- */
 
 .seccion-inicio{
     display:flex;
@@ -104,12 +69,9 @@ header{
     margin: 5rem 0;
     padding: 2rem 2rem;
     background-image: linear-gradient(to right,white 0%, grey 95%);
-    /* box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.8); */
-
 }
 
  section .producto-detalles{
-    /* display: inline-block; */
     color: gray;
     min-width:200px;
     width:40%;
@@ -117,7 +79,6 @@ header{
  }
 
  section aside{
-    /* display: inline-block; */
     min-width:200px;
     width: 40%;
   
@@ -127,18 +88,6 @@ header{
     max-width:100%;
     height: auto;
 }
-
-
-/* .articulo-inicio{
-    display:inline-flex;
-    flex-direction:row;
-    flex-wrap: wrap;
-    width:100%;
-    justify-content: center;
-    align-items:flex-start;
-
- } */
-
 
 .mensaje-sistema{
     display:block;
@@ -163,14 +112,20 @@ header{
 }
 
 .inline-form-button{
-    /* display: block; */
     margin: 0 auto;
-    /* margin-top:3em; */
     background-color:white;
     height:2.5em;
     width:6em;
     border-radius: 10px 10px 10px 10px;
     
+}
+
+.sombreado{
+    display:inline-block;
+    background-image: linear-gradient(to right,white 0%, grey 95%);
+    width:100%;
+    text-align:right;
+    font-style:italic;
 }
 
 .error-centrado{
@@ -182,7 +137,6 @@ header{
 }
 
 .seleccionado{
-    /* background-color:red; */
     font-weight:bold;
     text-decoration-line: underline;
 }

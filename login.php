@@ -20,12 +20,22 @@
 
 <?php
 
-if (!isset($_SESSION['usuario']) || !isset($_SESSION['password'])){
-	$_SESSION['usuario']=$_POST['usuario'];
-	$_SESSION['password']=$_POST['password'];
-}else{
-	$usuario = $_SESSION['usuario'];
-	$password=md5($_SESSION['password']);	
+// echo "PRE ISSET <br />";
+// echo "SESSION usuario:".$_SESSION['usuario']."<br />";
+// echo "SESSION password:".$_SESSION['password']."<br />";
+// echo "POST usuario:".$_POST['usuario']."<br />";
+// echo "POST usuario:".$_POST['password']."<br />";
+
+
+
+if ((!isset($_POST['usuario']) || !isset($_POST['password'])) && (!isset($_SESSION['usuario']) || !isset($_SESSION['password'])))
+{
+	header("Location:./index.php");
+}
+
+if(isset($_POST['usuario'])&&isset($_POST['password'])){
+	$usuario = $_POST['usuario'];
+	$password = md5($_POST['password']);
 }
 
 include("conexion.php");
@@ -49,8 +59,8 @@ if(mysqli_num_rows($consulta)!=0){
 
 		<?php
 		echo "<p>Bienvenid@, ".$_SESSION['nombre']."!</p>";
-		echo "Sus Privilegios son : ".$_SESSION['rol']."<br />";
-		echo "<h3 class='centrado'>MENU PRINCIPAL</h3>";
+		echo "Sus Permisos son de : ".$_SESSION['rol']."<br />";
+		echo "<h3 class='centrado sombreado'>MENU PRINCIPAL</h3>";
 
 		?>
 		</header>
@@ -62,7 +72,7 @@ if(mysqli_num_rows($consulta)!=0){
 		}
 
 		if($_SESSION['idrol']<mysqli_query($conexion, "SELECT MAX(IdRol) FROM ROL")){
-			echo "GESTION DE USUARIOS:<br />";
+			echo "<h3>GESTION DE USUARIOS:</h3><br />";
 			?>
 			<ul>
 				<li>Alta de usuario:
@@ -100,6 +110,10 @@ if(mysqli_num_rows($consulta)!=0){
 					</form>
 				</li>
 			</ul>
+			<p class="centrado">
+				<a href="logout.php">CERRAR SESIÓN</a>
+			</p>
+			
 			<?php
 		}
 		// if($_SESSION['idrol']<=2){
@@ -120,8 +134,9 @@ if(mysqli_num_rows($consulta)!=0){
 	?>
 	<p class="error-centrado"><?php echo "No es un usuario registrado"; ?></p>
 	<?php
-	
-	include ("form_login.php");
+		// $_SESSION=array();
+		// session_destroy();
+		include ("form_login.php");
 }
 
 ?>

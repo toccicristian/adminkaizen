@@ -21,7 +21,7 @@
 		<h1>Admin Kaizen</h1>
 		<nav class="navbar">
 			<div class="menu">
-				<a href="#" class="menu-item">Registrarse</a>
+				<a href="./form_registro.php" class="menu-item">Registrarse</a>
 				<a href="./form_login.php" class="menu-item seleccionado">Iniciar sesión</a>
 			</div>
 			<div class="isologo-small">

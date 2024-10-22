@@ -1,3 +1,4 @@
+<?php session_start();?>
 <!doctype html>
 <html>
 <head>
@@ -21,7 +22,7 @@
 		<h1>Admin Kaizen</h1>
 		<nav class="navbar">
 			<div class="menu">
-				<a href="#" class="menu-item">Registrarse</a>
+				<a href="./form_registro.php" class="menu-item">Registrarse</a>
 				<a href="./form_login.php" class="menu-item">Iniciar sesión</a>
 			</div>
 			<div class="isologo-small">
@@ -32,6 +33,17 @@
 		</nav>
     </header>
     <article>
+        <?php 
+            if(isset($_SESSION['mensajesistema'])){
+                ?><section class="seccion-inicio">
+                <?php
+                echo "<p class='mensaje-sistema'>".$_SESSION['mensajesistema']."</p>";
+                unset($_SESSION['mensajesistema']);
+                ?></section>
+                <?php
+            }
+        ?>        
+        </section>
         <section class="seccion-inicio">
             <div class="producto-detalles">
                 <p class="producto-descripcion">
