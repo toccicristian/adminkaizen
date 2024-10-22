@@ -22,7 +22,7 @@
 		<nav class="navbar">
 			<div class="menu">
 				<a href="#" class="menu-item">Registrarse</a>
-				<a href="./form_login.php" class="menu-item" target="_blank">Iniciar sesión</a>
+				<a href="./form_login.php" class="menu-item">Iniciar sesión</a>
 			</div>
 			<div class="isologo-small">
 				<a href="./index.php"><img class="main-logo-small" src="./imagenes/logo-200px.png" alt="adminkaizen logo"></img></a>
@@ -30,6 +30,7 @@
 			</div>
 
 		</nav>
+    </header>
     <article>
         <section class="seccion-inicio">
             <div class="producto-detalles">
@@ -48,7 +49,7 @@
             </aside> 
         </section>
     </article>
-</header>
+
 	
 
 

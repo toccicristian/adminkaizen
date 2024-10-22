@@ -180,3 +180,9 @@ header{
 .centrado{
     text-align:center;
 }
+
+.seleccionado{
+    /* background-color:red; */
+    font-weight:bold;
+    text-decoration-line: underline;
+}
