@@ -19,11 +19,18 @@
 <body>
 	<header>
 		<h1>Admin Kaizen</h1>
-		<a href="./form_login.php"><img class="main-logo" src="./imagenes/logo.png" alt="adminkaizen logo"></img></a>
-		
-		<p class="isotipo">Admin Kaizen</p>
+		<nav class="navbar">
+			<div class="menu">
+				<a href="./form_registro.php" class="menu-item">Registrarse</a>
+				<a href="./form_login.php" class="menu-item seleccionado">Iniciar sesión</a>
+			</div>
+			<div class="isologo-small">
+				<a href="./index.php"><img class="main-logo-small" src="./imagenes/logo-200px.png" alt="adminkaizen logo"></img></a>
+				<p class="isotipo-index">Admin Kaizen</p>
+			</div>
+		</nav>
 	</header>
-	<h2>Loguearse</h2>
+	<h2>Iniciar sesión</h2>
 	<form class="login-form" action="login.php" method="post">
     	<label>
 			<!-- Nombre de usuario -->
