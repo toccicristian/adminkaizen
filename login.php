@@ -20,14 +20,6 @@
 
 <?php
 
-// echo "PRE ISSET <br />";
-// echo "SESSION usuario:".$_SESSION['usuario']."<br />";
-// echo "SESSION password:".$_SESSION['password']."<br />";
-// echo "POST usuario:".$_POST['usuario']."<br />";
-// echo "POST usuario:".$_POST['password']."<br />";
-
-
-
 if ((!isset($_POST['usuario']) || !isset($_POST['password'])) && (!isset($_SESSION['usuario']) || !isset($_SESSION['password'])))
 {
 	header("Location:./index.php");
@@ -110,7 +102,7 @@ if(mysqli_num_rows($consulta)!=0){
 					</form>
 				</li>
 			</ul>
-			<p class="centrado">
+			<pclass="centrado">
 				<a href="logout.php">CERRAR SESIÓN</a>
 			</p>
 			
