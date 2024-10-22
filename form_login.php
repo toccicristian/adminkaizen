@@ -20,7 +20,6 @@
 	<header>
 		<h1>Admin Kaizen</h1>
 		<a href="./form_login.php"><img class="main-logo" src="./imagenes/logo.png" alt="adminkaizen logo"></img></a>
-		
 		<p class="isotipo">Admin Kaizen</p>
 	</header>
 	<h2>Loguearse</h2>
