@@ -32,7 +32,6 @@
 		$_SESSION['mensajesistema']="***El usuario ".$usuario." no se pudo crear porque ya existe.";
 	}
 
-
 	header("Location:./login.php");
 	exit();
 	
