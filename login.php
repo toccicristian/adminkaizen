@@ -90,7 +90,7 @@ if(mysqli_num_rows($consulta)!=0){
 							 $consulta_niveles=mysqli_query($conexion, "SELECT IdRol, Nombre FROM ROL");
 							 $resultado_niveles=mysqli_num_rows($consulta_niveles);
 							 while($resultado_niveles=mysqli_fetch_array($consulta_niveles)){
-								if ($resultado_niveles['IdRol']>=$_SESSION['idrol']){
+								if (($resultado_niveles['IdRol']>$_SESSION['idrol'])||($_SESSION['idrol']==1)){
 									?><option <?php if ($resultado_niveles['IdRol']==5){echo "selected";}?>><?php echo $resultado_niveles['Nombre']?></option><?php
 								}
 							 }
@@ -117,6 +117,9 @@ if(mysqli_num_rows($consulta)!=0){
 
 			<?php
 		}
+
+		
+
 		?>
 			<p class="centrado">
 				<a href="logout.php">CERRAR SESIÓN</a>
