@@ -118,7 +118,7 @@ if(mysqli_num_rows($consulta)!=0){
 			<?php
 		}
 
-		
+		echo "<h3>GESTION DE TAREAS:</h3><br />";
 
 		?>
 			<p class="centrado">
