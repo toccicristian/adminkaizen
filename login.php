@@ -119,30 +119,52 @@ if(mysqli_num_rows($consulta)!=0){
 		}
 
 		echo "<h3>GESTION DE TAREAS:</h3><br />";
-
 		?>
-			<p class="centrado">
-				<a href="logout.php">CERRAR SESIÓN</a>
-			</p>
+		<ul>
+			<li>Tareas asignadas
+				<li>
+					<form action="tareas.php" method="post" >
+						<input class="inline-form-button" type="submit" value="Consultar..."/>
+						<label for="solosincompletar"><input type="checkbox" name="solosincompletar">Sólo sin Completar</label>
+					</form>
+				</li>
+				<!-- SOLO MOSTRAR EL SIGUIENTE ITEM SI LAS TAREAS ASIGNADAS >0 -->
+				<li>
+					<form action="diagrama.php" method="post">
+						<input class="inline-form-button" type="submit" value="Ver Diagrama..."/>
+						<label for="solosincompletar"><input type="checkbox" name="solosincompletar">Sólo sin Completar</label>
+					</form>
+				</li>
+			</li>
+			<!-- SOLO MOSTRAR SI  $_SESSION['idrol']<5-->
+			<li>Nueva Tarea
+				<form action="creartarea.php" method="post" >
+					<ul>
+						<li>
+							<label for="taskstart">Nombre:<input type="text" maxlength=50 placeholder="Nombre de tarea" name="taskname" required /></label>
+						</li>
+						<li>
+							<label for="taskstart">Inicio :<input type="date" name="taskstart" required /></label>
+						</li>
+						<li>
+							<label for="taskstart">Mejor Fin :<input type="date" name="taskbestend" required /></label>
+						</li>
+						<li>
+							<label for="taskstart">Peor Fin :<input type="date" name="taskworstend" required /></label>
+						</li>
+						<p><textarea maxlength=255 rows="5" cols="40" placeholder="Notas adicionales..." name="tasknotes" ></textarea></p>
+						<input class="inline-form-button" type="submit" value="Crear tarea"/>
+					</ul>
+				</form>
+			</li>
+		</ul>
+
+
+	<p class="centrado">
+		<a href="logout.php">CERRAR SESIÓN</a>
+	</p>
 			
 		<?php
-
-
-		
-
-		// if($_SESSION['idrol']<=2){
-		// 	echo "OPCIONES DE SOCIO<br />";
-		// }
-		// if($_SESSION['idrol']<=3){
-		// 	echo "OPCIONES DE GERENTE<br />";
-		// }
-		// if($_SESSION['idrol']<=4){
-		// 	echo "OPCIONES DE SUPERVISOR<br />";
-		// }
-		// if($_SESSION['idrol']<=5){
-		// 	echo "OPCIONES DE OPERARIO<br />";
-		// }
-		// echo "<a href='panel.php'>Panel</a>";	
 
 }else{
 	?>
