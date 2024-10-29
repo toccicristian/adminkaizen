@@ -15,18 +15,6 @@
 	$rol = $_POST['nivel'];
 
 
-/*if(isset($_POST['newsletter'])){
-	$news="si";
-}else{
-	$news="no";
-}*/
-	// if ($_POST['newsletter'] === "") {
-	// 	$news="no";
-	// } else {
-	// 	$news="si";
-	// }
-
-
 	include("conexion.php");
 
 	$consulta=mysqli_query($conexion, "SELECT Nombre FROM USUARIO WHERE Nombre='$usuario'");
@@ -43,7 +31,6 @@
 	}else{
 		$_SESSION['mensajesistema']="***El usuario ".$usuario." no se pudo crear porque ya existe.";
 	}
-
 
 	header("Location:./login.php");
 	exit();

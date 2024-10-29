@@ -20,23 +20,20 @@
 
 <?php
 
-// echo "PRE ISSET <br />";
-// echo "SESSION usuario:".$_SESSION['usuario']."<br />";
-// echo "SESSION password:".$_SESSION['password']."<br />";
-// echo "POST usuario:".$_POST['usuario']."<br />";
-// echo "POST usuario:".$_POST['password']."<br />";
-
-
-
 if ((!isset($_POST['usuario']) || !isset($_POST['password'])) && (!isset($_SESSION['usuario']) || !isset($_SESSION['password'])))
 {
 	header("Location:./index.php");
+	exit();
 }
 
 if(isset($_POST['usuario'])&&isset($_POST['password'])){
 	$usuario = $_POST['usuario'];
 	$password = md5($_POST['password']);
+}elseif((isset($_SESSION['usuario'])&&isset($_SESSION['password']))){
+	$usuario = $_SESSION['usuario'];
+	$password = md5($_SESSION['password']);
 }
+
 
 include("conexion.php");
 
@@ -50,6 +47,11 @@ $consulta=mysqli_query($conexion, "SELECT USUARIO.Nombre, USUARIO.EMail, ROL.IdR
 if(mysqli_num_rows($consulta)!=0){
 	$respuesta=mysqli_fetch_array($consulta);
 	
+	if(!isset($_SESSION['usuario']) && !isset($_SESSION['password'])){
+		$_SESSION['usuario']=$respuesta['Nombre'];
+		$_SESSION['password']=$_POST['password'];
+	}
+
 	$_SESSION['nombre']=$respuesta['Nombre'];
 	$_SESSION['email']=$respuesta['EMail'];
 	$_SESSION['idrol']=$respuesta['IdRol'];
@@ -58,8 +60,7 @@ if(mysqli_num_rows($consulta)!=0){
 		<header>
 
 		<?php
-		echo "<p>Bienvenid@, ".$_SESSION['nombre']."!</p>";
-		echo "Sus Permisos son de : ".$_SESSION['rol']."<br />";
+		echo "<p>Bienvenid@, ".$_SESSION['nombre']."!.&nbsp Sus Permisos son de : ".$_SESSION['rol'].".</p>";
 		echo "<h3 class='centrado sombreado'>MENU PRINCIPAL</h3>";
 
 		?>
@@ -71,7 +72,10 @@ if(mysqli_num_rows($consulta)!=0){
 			unset($_SESSION['mensajesistema']);
 		}
 
-		if($_SESSION['idrol']<mysqli_query($conexion, "SELECT MAX(IdRol) FROM ROL")){
+		$consulta_idrol_max=mysqli_query($conexion, "SELECT MAX(IdRol) AS 'max_idrol' FROM ROL");
+		$idrol_max=mysqli_fetch_array($consulta_idrol_max);
+
+		if((int)$_SESSION['idrol']<(int)$idrol_max['max_idrol']){
 			echo "<h3>GESTION DE USUARIOS:</h3><br />";
 			?>
 			<ul>
@@ -86,7 +90,7 @@ if(mysqli_num_rows($consulta)!=0){
 							 $consulta_niveles=mysqli_query($conexion, "SELECT IdRol, Nombre FROM ROL");
 							 $resultado_niveles=mysqli_num_rows($consulta_niveles);
 							 while($resultado_niveles=mysqli_fetch_array($consulta_niveles)){
-								if ($resultado_niveles['IdRol']>=$_SESSION['idrol']){
+								if (($resultado_niveles['IdRol']>$_SESSION['idrol'])||($_SESSION['idrol']==1)){
 									?><option <?php if ($resultado_niveles['IdRol']==5){echo "selected";}?>><?php echo $resultado_niveles['Nombre']?></option><?php
 								}
 							 }
@@ -110,25 +114,57 @@ if(mysqli_num_rows($consulta)!=0){
 					</form>
 				</li>
 			</ul>
-			<p class="centrado">
-				<a href="logout.php">CERRAR SESIÓN</a>
-			</p>
-			
+
 			<?php
 		}
-		// if($_SESSION['idrol']<=2){
-		// 	echo "OPCIONES DE SOCIO<br />";
-		// }
-		// if($_SESSION['idrol']<=3){
-		// 	echo "OPCIONES DE GERENTE<br />";
-		// }
-		// if($_SESSION['idrol']<=4){
-		// 	echo "OPCIONES DE SUPERVISOR<br />";
-		// }
-		// if($_SESSION['idrol']<=5){
-		// 	echo "OPCIONES DE OPERARIO<br />";
-		// }
-		// echo "<a href='panel.php'>Panel</a>";	
+
+		echo "<h3>GESTION DE TAREAS:</h3><br />";
+		?>
+		<ul>
+			<li>Tareas asignadas
+				<li>
+					<form action="tareas.php" method="post" >
+						<input class="inline-form-button" type="submit" value="Consultar..."/>
+						<label for="solosincompletar"><input type="checkbox" name="solosincompletar">Sólo sin Completar</label>
+					</form>
+				</li>
+				<!-- SOLO MOSTRAR EL SIGUIENTE ITEM SI LAS TAREAS ASIGNADAS >0 -->
+				<li>
+					<form action="diagrama.php" method="post">
+						<input class="inline-form-button" type="submit" value="Ver Diagrama..."/>
+						<label for="solosincompletar"><input type="checkbox" name="solosincompletar">Sólo sin Completar</label>
+					</form>
+				</li>
+			</li>
+			<!-- SOLO MOSTRAR SI  $_SESSION['idrol']<5-->
+			<li>Nueva Tarea
+				<form action="creartarea.php" method="post" >
+					<ul>
+						<li>
+							<label for="taskstart">Nombre:<input type="text" maxlength=50 placeholder="Nombre de tarea" name="taskname" required /></label>
+						</li>
+						<li>
+							<label for="taskstart">Inicio :<input type="date" name="taskstart" required /></label>
+						</li>
+						<li>
+							<label for="taskstart">Mejor Fin :<input type="date" name="taskbestend" required /></label>
+						</li>
+						<li>
+							<label for="taskstart">Peor Fin :<input type="date" name="taskworstend" required /></label>
+						</li>
+						<p><textarea maxlength=255 rows="5" cols="40" placeholder="Notas adicionales..." name="tasknotes" ></textarea></p>
+						<input class="inline-form-button" type="submit" value="Crear tarea"/>
+					</ul>
+				</form>
+			</li>
+		</ul>
+
+
+	<p class="centrado">
+		<a href="logout.php">CERRAR SESIÓN</a>
+	</p>
+			
+		<?php
 
 }else{
 	?>
