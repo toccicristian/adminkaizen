@@ -80,9 +80,28 @@ header{
 
  section aside{
     min-width:200px;
-    width: 40%;
+    width: 50%;
+    margin-left:2rem;
+    margin-top:2rem;
   
 }
+
+article.tabla-resultados{
+    width:60%;
+    margin:0 auto;
+    padding: 10px;
+}
+
+.campo-resultados{
+    text-align:left;
+    width:30%;
+}
+
+.icono{
+    height:2rem;
+    /* margin-left:4rem; */
+}
+
 
 .producto-screenshot{
     max-width:100%;

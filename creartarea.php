@@ -38,8 +38,8 @@
 	// echo 'idtarea:'.$idtarea.'<br/>';
 
 
-	$consulta=mysqli_query($conexion, "INSERT INTO ASIGNACIONDETAREA (USUARIO_IdUsuario, USUARIO_IdRol, TAREA_IdTarea, inicio, mejorFin, peorFin)
-										VALUES('$ownerid', '$owneridrol','$idtarea','$inicio','$mejorfin','$peorfin')");
+	$consulta=mysqli_query($conexion, "INSERT INTO ASIGNACIONDETAREA (USUARIO_IdUsuario, TAREA_IdTarea, inicio, mejorFin, peorFin, idAsignador)
+										VALUES('$ownerid','$idtarea','$inicio','$mejorfin','$peorfin','$ownerid')");
 
 	
 	$_SESSION['mensajesistema']="Tarea registrada a nombre de ".$username;
