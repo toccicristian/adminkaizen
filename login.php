@@ -9,6 +9,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script type="text/javascript" src="./js/busqueda.js"></script>
+
 <!-- <link href="https://fonts.googleapis.com/css2?family=Amarante&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Nosifer&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
@@ -122,20 +125,22 @@ if(mysqli_num_rows($consulta)!=0){
 		?>
 		<ul>
 			<li>Tareas asignadas
-				<li>
-					<form action="tareas.php" method="post" >
-						<input class="inline-form-button" type="submit" value="Consultar..."/>
-						<label for="solosincompletar"><input type="checkbox" name="solosincompletar">Sólo sin Completar</label>
-					</form>
-				</li>
-				<!-- SOLO MOSTRAR EL SIGUIENTE ITEM SI LAS TAREAS ASIGNADAS >0 -->
-				<li>
-					<form action="diagrama.php" method="post">
-						<input class="inline-form-button" type="submit" value="Ver Diagrama..."/>
-						<label for="solosincompletar"><input type="checkbox" name="solosincompletar">Sólo sin Completar</label>
-					</form>
-				</li>
-			</li>
+				<ul>
+					<li>
+						<form action="tareas.php" method="post" >
+							<input class="inline-form-button" type="submit" value="Consultar..."/>
+							<label for="solosincompletar"><input type="checkbox" name="solosincompletar">Sólo sin Completar</label>
+						</form>
+					</li>
+					<!-- SOLO MOSTRAR EL SIGUIENTE ITEM SI LAS TAREAS ASIGNADAS >0 -->
+					<li>
+						<form action="diagrama.php" method="post">
+							<input class="inline-form-button" type="submit" value="Ver Diagrama..."/>
+							<label for="solosincompletar"><input type="checkbox" name="solosincompletar">Sólo sin Completar</label>
+						</form>
+					</li>
+				</ul>
+
 			<!-- SOLO MOSTRAR SI  $_SESSION['idrol']<5-->
 			<li>Nueva Tarea
 				<form action="creartarea.php" method="post" >
@@ -156,6 +161,10 @@ if(mysqli_num_rows($consulta)!=0){
 						<input class="inline-form-button" type="submit" value="Crear tarea"/>
 					</ul>
 				</form>
+			</li>
+			<li>Busqueda de Tareas
+				<input type="text" id="search" placeholder="Nombre de la tarea" />
+				<div id="display"></div>
 			</li>
 		</ul>
 
