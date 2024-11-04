@@ -123,53 +123,67 @@ if(mysqli_num_rows($consulta)!=0){
 			<?php
 		}
 
-		echo "<h3>GESTION DE TAREAS:</h3><br />";
 		?>
-		<ul>
-			<li>Tareas asignadas
+		<section>
+			<h3>GESTION DE TAREAS</h3>
+			<article class="tareas">
 				<ul>
-					<li>
-						<form action="tareas.php" method="post" >
-							<input class="inline-form-button" type="submit" value="Consultar..."/>
-							<label for="solosincompletar"><input type="checkbox" name="solosincompletar">Sólo sin Completar</label>
-						</form>
-					</li>
-					<!-- SOLO MOSTRAR EL SIGUIENTE ITEM SI LAS TAREAS ASIGNADAS >0 -->
-					<li>
-						<form action="diagrama.php" method="post">
-							<input class="inline-form-button" type="submit" value="Diagrama..."/>
-							<label for="solosincompletar"><input type="checkbox" name="solosincompletar">Sólo sin Completar</label>
+					<li><h4>Tareas asignadas</h4> 
+						<ul>
+							<li>
+								<form action="tareas.php" method="post" >
+									<input class="inline-form-button" type="submit" value="Consultar..."/>
+									<label for="solosincompletar"><input type="checkbox" name="solosincompletar">Sólo sin Completar</label>
+								</form>
+							</li>
+							<!-- SOLO MOSTRAR EL SIGUIENTE ITEM SI LAS TAREAS ASIGNADAS >0 -->
+							<li>
+								<form action="diagrama.php" method="post">
+									<input class="inline-form-button" type="submit" value="Diagrama..."/>
+									<label for="solosincompletar"><input type="checkbox" name="solosincompletar">Sólo sin Completar</label>
+								</form>
+							</li>
+						</ul>
+
+			<!-- SOLO MOSTRAR SI  $_SESSION['idrol']<5-->
+<?php
+			if ($_SESSION['idrol'] < $idrol_max['max_idrol']){
+?>	
+
+					<li><h4>Nueva Tarea</h4>
+						<form action="creartarea.php" method="post" >
+							<ul>
+								<li>
+									<label for="taskstart">Nombre:<input type="text" maxlength=50 placeholder="Nombre de tarea" name="taskname" required /></label>
+								</li>
+								<li>
+									<label for="taskstart">Inicio :<input type="date" name="taskstart" required /></label>
+								</li>
+								<li>
+									<label for="taskstart">Mejor Fin :<input type="date" name="taskbestend" required /></label>
+								</li>
+								<li>
+									<label for="taskstart">Peor Fin :<input type="date" name="taskworstend" required /></label>
+								</li>
+								<p><textarea maxlength=255 rows="5" cols="40" placeholder="Notas adicionales..." name="tasknotes" ></textarea></p>
+								<input class="inline-form-button" type="submit" value="Crear tarea"/>
+							</ul>
 						</form>
 					</li>
 				</ul>
+				<aside class="busqueda-tareas">
+					<h4>Busqueda de Tareas</h4>
+					<input type="text" id="busquedaTareas" placeholder="Nombre de la tarea" />
+					<label for="mostrareliminadas"><input type="checkbox" id="mostrareliminadas" name="mostrareliminadas">Mostrar eliminadas</label>
+					<div id="resultadoTareas"></div>
+				</aside>
 
-			<!-- SOLO MOSTRAR SI  $_SESSION['idrol']<5-->
-			<li>Nueva Tarea
-				<form action="creartarea.php" method="post" >
-					<ul>
-						<li>
-							<label for="taskstart">Nombre:<input type="text" maxlength=50 placeholder="Nombre de tarea" name="taskname" required /></label>
-						</li>
-						<li>
-							<label for="taskstart">Inicio :<input type="date" name="taskstart" required /></label>
-						</li>
-						<li>
-							<label for="taskstart">Mejor Fin :<input type="date" name="taskbestend" required /></label>
-						</li>
-						<li>
-							<label for="taskstart">Peor Fin :<input type="date" name="taskworstend" required /></label>
-						</li>
-						<p><textarea maxlength=255 rows="5" cols="40" placeholder="Notas adicionales..." name="tasknotes" ></textarea></p>
-						<input class="inline-form-button" type="submit" value="Crear tarea"/>
-					</ul>
-				</form>
-			</li>
-			<li>Busqueda de Tareas
-				<input type="text" id="busquedaTareas" placeholder="Nombre de la tarea" />
-				<label for="mostrareliminadas"><input type="checkbox" id="mostrareliminadas" name="mostrareliminadas">Mostrar eliminadas</label>
-				<div id="resultadoTareas"></div>
-			</li>
-		</ul>
+<?php
+			}
+?>
+
+			</article>
+		</section>
 
 
 	<p class="centrado">

@@ -6,6 +6,10 @@ h2{
     text-align:center;
 }
 
+ul{
+    list-style-type: none;
+}
+
 ul li{
     margin:2em 0;
 }
@@ -97,6 +101,21 @@ article.tabla-resultados{
     width:30%;
     border-bottom: 1px solid black;
 }
+
+article.tareas{
+    display:flex;
+    flex-direction:row;
+    justify-content: space-evenly;
+    border-style: solid;
+    border-width: thin;
+    border-radius: 1%;
+    margin: 1rem 1rem;
+}
+
+/* article aside.busqueda-tareas{
+    margin-left:2rem;
+    background-color:red;
+} */
 
 .icono{
     height:2rem;
