@@ -30,8 +30,9 @@
                 <th class="campo-resultados">Peor Fin</th>
             </tr>
 <?php
+    echo $_POST['mostrareliminadas']."<br/>";
     while ($resultado = MySQLi_fetch_array($consulta)) {
-        if($resultado['eliminada']==0){
+        if(($resultado['eliminada']==0) || ($_POST['mostrareliminadas']!='false')){
             
         
 ?>

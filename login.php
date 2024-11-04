@@ -166,6 +166,7 @@ if(mysqli_num_rows($consulta)!=0){
 			</li>
 			<li>Busqueda de Tareas
 				<input type="text" id="busquedaTareas" placeholder="Nombre de la tarea" />
+				<label for="mostrareliminadas"><input type="checkbox" id="mostrareliminadas" name="mostrareliminadas">Mostrar eliminadas</label>
 				<div id="resultadoTareas"></div>
 			</li>
 		</ul>
