@@ -11,21 +11,14 @@
 <?php
     include ("conexion.php");
     
-    // echo $_SESSION['nombre']."<br />";
-    // $_SESSION['nombre']=$respuesta['Nombre'];
-	// $_SESSION['email']=$respuesta['EMail'];
-	// $_SESSION['idrol']=$respuesta['IdRol'];
-	// $_SESSION['rol']=$respuesta['ROL_Nombre'];
-
     if (isset($_POST['search'])) {
         $nombreTarea = $_POST['search'];
-        $consulta = MySQLi_query($conexion, "SELECT idTarea, Nombre, Inicio, MejorFin, PeorFin, OwnerId
+        $consulta = MySQLi_query($conexion, "SELECT idTarea, Nombre, Inicio, MejorFin, PeorFin, OwnerId, eliminada
                                             FROM TAREA WHERE Nombre LIKE '%$nombreTarea%' LIMIT 10");
 
         $idrol=$_SESSION['idrol'];
         $username=$_SESSION['nombre'];
         
-        // $id=$_SESSION['']
 ?>
 <section>
     <article class="tabla-resultados">
@@ -38,6 +31,9 @@
             </tr>
 <?php
     while ($resultado = MySQLi_fetch_array($consulta)) {
+        if($resultado['eliminada']==0){
+            
+        
 ?>
             <tr onclick='fill("<?php echo $resultado['Nombre']; ?>")'>
                 <td class="campo-resultados"><?php echo $resultado['Nombre'];   ?></td>
@@ -61,7 +57,7 @@
 ?>
             </tr>
 <?php
-    }}
+    }}}
 ?>
         </table>
     </article>

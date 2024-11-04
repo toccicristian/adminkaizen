@@ -27,7 +27,7 @@
 
 	$consultaExiste=mysqli_query($conexion, "SELECT Nombre, eliminada FROM TAREA WHERE TAREA.Nombre = '$nombre'");
 	if(mysqli_num_rows($consultaExiste)!=0){
-		$_SESSION['mensajesistema']="Ya existe una tarea con ese nombre";	
+		$_SESSION['mensajesistema']="***Ya existe una tarea con ese nombre";	
 		$resultadoExiste = mysqli_fetch_array($consultaExiste);
 		if($resultadoExiste['eliminada']==1){
 			$_SESSION['mensajesistema']=$_SESSION['mensajesistema']." y se encuentra eliminada. Intente restaurarla";
