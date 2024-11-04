@@ -21,26 +21,27 @@
 	$eliminadorid= $resultado['IdUsuario'];
 	$eliminadoridrol = $_SESSION['idrol'];
 
-	$nombre = $_POST['taskname'];
+	// $nombre = $_POST['taskname'];
+	$taskid = $_POST['taskid'];
 
 	$consultaExiste=mysqli_query($conexion, "SELECT idTarea, Nombre, OwnerId, eliminada 
 											FROM TAREA 
-											WHERE TAREA.Nombre = '$nombre' AND TAREA.eliminada = 0");
+											WHERE TAREA.idTarea = '$taskid' AND TAREA.eliminada = 0");
 
 
 	if(mysqli_num_rows($consultaExiste)!=0){
 		$resultadoExiste = mysqli_fetch_array($consultaExiste);
 		$ownerId = $resultadoExiste['OwnerId'];
 
-		$consultaOwner=mysqli_query($conexion, "SELECT ROL_IdRol, FROM USUARIO WHERE USUARIO.IdUsuario = '$ownerId'");
+		$consultaOwner=mysqli_query($conexion, "SELECT ROL_IdRol FROM USUARIO WHERE USUARIO.IdUsuario = '$ownerId'");
 		$resultadoOwner=mysqli_fetch_array($consultaOwner);
 		$ownerIdRol=$resultadoOwner['ROL_IdRol'];
 
-		
+
 		if(($eliminadorid == $ownerId) || ($eliminadoridrol<$ownerIdRol)){
 			$idtarea = $resultadoExiste['idTarea'];
 			$consulta=mysqli_query($conexion, "UPDATE TAREA 
-												SET eliminada=1 idEliminador= '$eliminadorid' 
+												SET eliminada=1, idEliminador='$eliminadorid' 
 												WHERE TAREA.idTarea = '$idtarea'");
 	
 			$_SESSION['mensajesistema']="La tarea se ha marcado como eliminada.";	

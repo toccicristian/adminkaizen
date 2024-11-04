@@ -95,6 +95,7 @@ article.tabla-resultados{
 .campo-resultados{
     text-align:left;
     width:30%;
+    border-bottom: 1px solid black;
 }
 
 .icono{

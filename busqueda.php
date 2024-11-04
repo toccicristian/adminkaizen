@@ -53,7 +53,7 @@
 				<tr>
 					<th class="campo-resultados">Nombre</th>
 					<th class="campo-resultados">Permisos</th>
-					<th></th>
+					<th class="campo-resultados"></th>
 				</tr>
 
 	<?php
