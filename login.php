@@ -163,8 +163,8 @@ if(mysqli_num_rows($consulta)!=0){
 				</form>
 			</li>
 			<li>Busqueda de Tareas
-				<input type="text" id="search" placeholder="Nombre de la tarea" />
-				<div id="display"></div>
+				<input type="text" id="busquedaTareas" placeholder="Nombre de la tarea" />
+				<div id="resultadoTareas"></div>
 			</li>
 		</ul>
 

@@ -2,14 +2,14 @@
     //<li onclick='fill("<?php echo $resultado['Nombre']; ?>")'>
     //y le paso el resultado de la consulta...
     function fill(Value) {
-         $('#search').val(Value);
-         $('#display').hide();
+         $('#busquedaTareas').val(Value);
+         $('#resultadoTareas').hide();
        }
        $(document).ready(function() {
-         $("#search").keyup(function() {//llamo a esta funcion cuando se presiona una tecla en el elemento de id search
-             var nombre = $('#search').val();
+         $("#busquedaTareas").keyup(function() {//llamo a esta funcion cuando se presiona una tecla en el elemento de id search
+             var nombre = $('#busquedaTareas').val();
              if (nombre == "") {
-                 $("#display").html(""); //si el input de id search esta vacio, se limpian los resultados
+                 $("#resultadoTareas").html(""); //si el input de id search esta vacio, se limpian los resultados
              }
              else {
                 //AJAX is called.
@@ -21,7 +21,7 @@
                      },
                     //y además llamo a esta funcion que altera el contenido del div de id display
                      success: function(html) {
-                         $("#display").html(html).show();
+                         $("#resultadoTareas").html(html).show();
                      }
                  });
              }
