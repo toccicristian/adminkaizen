@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Alta de tarea</title>
+<title>Eliminación de tarea</title>
 </head>
 
 <body>
@@ -15,35 +15,42 @@
 
 
 	$username = $_SESSION['nombre'];
+
 	$consulta = mysqli_query($conexion, "SELECT IdUsuario FROM USUARIO WHERE Nombre = '$username'");
 	$resultado = mysqli_fetch_array($consulta);
-	$ownerid= $resultado['IdUsuario'];
-	$owneridrol = $_SESSION['idrol'];
+	$eliminadorid= $resultado['IdUsuario'];
+	$eliminadoridrol = $_SESSION['idrol'];
+
 	$nombre = $_POST['taskname'];
-	$inicio = $_POST['taskstart'];
-	$mejorfin = $_POST['taskbestend'];
-	$peorfin = $_POST['taskworstend'];
-	$notas = $_POST['tasknotes'];
+
+	$consultaExiste=mysqli_query($conexion, "SELECT idTarea, Nombre, OwnerId, eliminada 
+											FROM TAREA 
+											WHERE TAREA.Nombre = '$nombre' AND TAREA.eliminada = 0");
 
 
-	$consulta=mysqli_query($conexion, "INSERT INTO TAREA (Nombre, Inicio, MejorFin, PeorFin, Completada, Notas, OwnerId)
-										VALUES('$nombre', '$inicio','$mejorfin','$peorfin',0,'$notas', '$ownerid')");
+	if(mysqli_num_rows($consultaExiste)!=0){
+		$resultadoExiste = mysqli_fetch_array($consultaExiste);
+		$ownerId = $resultadoExiste['OwnerId'];
 
-//select * from TAREA where  idTarea=(select max(idTarea) from TAREA);
-	$consulta=mysqli_query($conexion, "SELECT * FROM TAREA WHERE idTarea=(SELECT MAX(idTarea) FROM TAREA)");
-	$resultado=mysqli_fetch_array($consulta);
+		$consultaOwner=mysqli_query($conexion, "SELECT ROL_IdRol, FROM USUARIO WHERE USUARIO.IdUsuario = '$ownerId'");
+		$resultadoOwner=mysqli_fetch_array($consultaOwner);
+		$ownerIdRol=$resultadoOwner['ROL_IdRol'];
+
+		
+		if(($eliminadorid == $ownerId) || ($eliminadoridrol<$ownerIdRol)){
+			$idtarea = $resultadoExiste['idTarea'];
+			$consulta=mysqli_query($conexion, "UPDATE TAREA 
+												SET eliminada=1 idEliminador= '$eliminadorid' 
+												WHERE TAREA.idTarea = '$idtarea'");
 	
-	$idtarea=$resultado['idTarea'];
+			$_SESSION['mensajesistema']="La tarea se ha marcado como eliminada.";	
+		}else{
+			$_SESSION['mensajesistema']="No dispone de los permisos para eliminar la tarea.";	
+		}
 
-	// echo 'idtarea:'.$idtarea.'<br/>';
-
-
-	$consulta=mysqli_query($conexion, "INSERT INTO ASIGNACIONDETAREA (USUARIO_IdUsuario, TAREA_IdTarea, inicio, mejorFin, peorFin, idAsignador)
-										VALUES('$ownerid','$idtarea','$inicio','$mejorfin','$peorfin','$ownerid')");
-
-	
-	$_SESSION['mensajesistema']="Tarea registrada a nombre de ".$username;
-
+	}else{
+		$_SESSION['mensajesistema']="La tarea no se ha podido eliminar debido a que no existe o que ya habia sido eliminada.";	
+	}
 
 	header("Location:./login.php");
 	exit();
