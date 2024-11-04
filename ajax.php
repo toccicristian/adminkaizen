@@ -30,7 +30,6 @@
                 <th class="campo-resultados">Peor Fin</th>
             </tr>
 <?php
-    echo $_POST['mostrareliminadas']."<br/>";
     while ($resultado = MySQLi_fetch_array($consulta)) {
         if(($resultado['eliminada']==0) || ($_POST['mostrareliminadas']!='false')){
             
@@ -47,11 +46,26 @@
         $consultaOutRol=mysqli_query($conexion, "SELECT IdUsuario FROM USUARIO WHERE USUARIO.IdUsuario = '$ownerid' AND USUARIO.ROL_IdRol > '$idrol'");
         if((mysqli_num_rows($consultaEsOwner)!=0) || (mysqli_num_rows($consultaOutRol)!=0)){
             ?>  <td class="campo-resultados">
+<?php 
+            if($resultado['eliminada']==1){
+?>
+                    <form action="restaurartarea.php" method="post">
+                        <input type="hidden" name="taskid" value=<?php echo $resultado['idTarea'] ?>>
+                        <button type="submit" class="btn btn-secondary">Restaurar</button>
+                    </form>
+<?php
+            }
+            else{
+?>
                     <form action="eliminartarea.php" method="post" >
                         <input type="hidden" name="taskid" value=<?php echo $resultado['idTarea'] ?>>
                         <button type="submit" class="btn btn-danger">Eliminar</button>
                     </form>
-                </td><?php
+                <?php
+            }
+            ?>
+            </td>
+        <?php
         }
         
 

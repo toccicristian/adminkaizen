@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Eliminación de tarea</title>
+<title>Restauración de tarea</title>
 </head>
 
 <body>
@@ -18,14 +18,14 @@
 
 	$consulta = mysqli_query($conexion, "SELECT IdUsuario FROM USUARIO WHERE Nombre = '$username'");
 	$resultado = mysqli_fetch_array($consulta);
-	$eliminadorid= $resultado['IdUsuario'];
-	$eliminadoridrol = $_SESSION['idrol'];
+	$restauradorid= $resultado['IdUsuario'];
+	$restauradoridrol = $_SESSION['idrol'];
 
 	$taskid = $_POST['taskid'];
 
 	$consultaExiste=mysqli_query($conexion, "SELECT idTarea, Nombre, OwnerId, eliminada 
 											FROM TAREA 
-											WHERE TAREA.idTarea = '$taskid' AND TAREA.eliminada = 0");
+											WHERE TAREA.idTarea = '$taskid' AND TAREA.eliminada = 1");
 
 
 	if(mysqli_num_rows($consultaExiste)!=0){
@@ -37,19 +37,19 @@
 		$ownerIdRol=$resultadoOwner['ROL_IdRol'];
 
 
-		if(($eliminadorid == $ownerId) || ($eliminadoridrol<$ownerIdRol)){
+		if(($restauradorid == $ownerId) || ($restauradoridrol<$ownerIdRol)){
 			$idtarea = $resultadoExiste['idTarea'];
 			$consulta=mysqli_query($conexion, "UPDATE TAREA 
-												SET eliminada=1, idEliminador='$eliminadorid' 
+												SET eliminada=0 
 												WHERE TAREA.idTarea = '$idtarea'");
 	
-			$_SESSION['mensajesistema']="La tarea se ha marcado como eliminada.";	
+			$_SESSION['mensajesistema']="La tarea ha sido restaurada.";	
 		}else{
-			$_SESSION['mensajesistema']="No dispone de los permisos para eliminar la tarea.";	
+			$_SESSION['mensajesistema']="No dispone de los permisos para restaurar la tarea.";	
 		}
 
 	}else{
-		$_SESSION['mensajesistema']="La tarea no se ha podido eliminar debido a que no existe o que ya habia sido eliminada.";	
+		$_SESSION['mensajesistema']="La tarea no se ha podido restaurar debido a que no existe o que no se encuentra eliminada.";	
 	}
 
 	header("Location:./login.php");
