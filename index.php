@@ -50,14 +50,14 @@
                     <h3>Plataforma de gestión de actividades</h3>
                     <p>
                         Admin Kaizen es una plataforma de administración de actividades diseñada 
-                        para optimizar la coordinación y gestión de proyectos. 
+                        para optimizar la coordinación y gestión jerarquica de proyectos. 
                         Ofrece una interfaz intuitiva y fácil de usar, que permite a los usuarios gestionar tareas, 
                         programar eventos, asignar recursos y supervisar el progreso de los proyectos en tiempo real. 
                     </p>
                 </p>
             </div>
             <aside>
-                <img src="./imagenes/logo.png" alt="screenshot del producto" class="producto-screenshot">
+                <img src="./imagenes/preview.png" alt="screenshot del producto" class="producto-screenshot">
             </aside> 
         </section>
     </article>

@@ -6,6 +6,10 @@ h2{
     text-align:center;
 }
 
+ul{
+    list-style-type: none;
+}
+
 ul li{
     margin:2em 0;
 }
@@ -80,9 +84,44 @@ header{
 
  section aside{
     min-width:200px;
-    width: 40%;
+    width: 50%;
+    margin-left:2rem;
+    margin-top:2rem;
   
 }
+
+article.tabla-resultados{
+    width:60%;
+    margin:0 auto;
+    padding: 10px;
+}
+
+.campo-resultados{
+    text-align:left;
+    width:30%;
+    border-bottom: 1px solid black;
+}
+
+article.tareas{
+    display:flex;
+    flex-direction:row;
+    justify-content: space-evenly;
+    border-style: solid;
+    border-width: thin;
+    border-radius: 1%;
+    margin: 1rem 1rem;
+}
+
+/* article aside.busqueda-tareas{
+    margin-left:2rem;
+    background-color:red;
+} */
+
+.icono{
+    height:2rem;
+    /* margin-left:4rem; */
+}
+
 
 .producto-screenshot{
     max-width:100%;
