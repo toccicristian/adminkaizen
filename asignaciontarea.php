@@ -39,7 +39,6 @@
 <?php
 		include('conexion.php');
 
-		
 		if(isset($_SESSION['idtask'])){
 			$idtarea=$_SESSION['idtask'];
 			unset($_SESSION['idtask']);
@@ -98,7 +97,7 @@
 						<td class="campo-resultados"><?php echo $resultado['ROL_Nombre']; ?></td>
 						<td class="campo-resultados"><?php echo $resultado['nombreAsignador']; ?></td>
 						<td class="campo-resultados">
-							<form action="desasignar.php" method="post">
+							<form action="desasignartarea.php" method="post">
 								<input type="hidden" name="taskid" value=<?php echo $idtarea ?>>
 								<input type="hidden" name="userid" value=<?php echo $resultado['IdUsuario'] ?>>
 								<button type="submit" class="btn btn-danger">Desasignar</button>
@@ -127,12 +126,24 @@
 
 <?php
 		
+		// $consultaIdDisponibles=mysqli_query($conexion,"SELECT u.IdUsuario, u.Nombre, r.Nombre AS ROL_Nombre
+		// 											FROM USUARIO u 
+		// 											JOIN ROL r ON u.ROL_IdRol = r.IdRol
+		// 											LEFT JOIN ASIGNACIONDETAREA a ON u.IdUsuario = a.USUARIO_IdUsuario 
+		// 											AND (a.TAREA_IdTarea = 17 OR a.TAREA_IdTarea IS NULL)
+		// 											WHERE a.USUARIO_IdUsuario IS NULL OR a.TAREA_IdTarea != $idtarea;");
+
 		$consultaIdDisponibles=mysqli_query($conexion,"SELECT u.IdUsuario, u.Nombre, r.Nombre AS ROL_Nombre
-													FROM USUARIO u 
-													JOIN ROL r ON u.ROL_IdRol = r.IdRol
-													LEFT JOIN ASIGNACIONDETAREA a ON u.IdUsuario = a.USUARIO_IdUsuario 
-													AND (a.TAREA_IdTarea = 17 OR a.TAREA_IdTarea IS NULL)
-													WHERE a.USUARIO_IdUsuario IS NULL OR a.TAREA_IdTarea != $idtarea;");
+														FROM USUARIO u
+														JOIN ROL r ON u.ROL_IdRol = r.IdRol
+														WHERE u.IdUsuario NOT IN (
+															SELECT asig.USUARIO_IdUsuario
+															FROM ASIGNACIONDETAREA asig
+															WHERE asig.TAREA_IdTarea = $idtarea)");
+
+
+
+
 
 		while($resultado=mysqli_fetch_array($consultaIdDisponibles)){
 ?>	
