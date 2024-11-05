@@ -31,7 +31,6 @@
 	$_SESSION['mensajesistema']="Tarea de ".$asignado." desasignada por ".$asignador.".";
 	$_SESSION['idtask']=$taskid;
 
-	// include("asignaciontarea.php");
 	header("Location:./asignaciontarea.php");
 	exit();
 	

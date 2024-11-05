@@ -12,9 +12,6 @@
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script type="text/javascript" src="./js/busqueda.js"></script>
 
-<!-- <link href="https://fonts.googleapis.com/css2?family=Amarante&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Nosifer&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <link rel="stylesheet" href="css/estilos.css">
@@ -197,8 +194,6 @@ if(mysqli_num_rows($consulta)!=0){
 	?>
 	<p class="error-centrado"><?php echo "No es un usuario registrado"; ?></p>
 	<?php
-		// $_SESSION=array();
-		// session_destroy();
 		include ("form_login.php");
 }
 

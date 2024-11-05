@@ -126,13 +126,6 @@
 
 <?php
 		
-		// $consultaIdDisponibles=mysqli_query($conexion,"SELECT u.IdUsuario, u.Nombre, r.Nombre AS ROL_Nombre
-		// 											FROM USUARIO u 
-		// 											JOIN ROL r ON u.ROL_IdRol = r.IdRol
-		// 											LEFT JOIN ASIGNACIONDETAREA a ON u.IdUsuario = a.USUARIO_IdUsuario 
-		// 											AND (a.TAREA_IdTarea = 17 OR a.TAREA_IdTarea IS NULL)
-		// 											WHERE a.USUARIO_IdUsuario IS NULL OR a.TAREA_IdTarea != $idtarea;");
-
 		$consultaIdDisponibles=mysqli_query($conexion,"SELECT u.IdUsuario, u.Nombre, r.Nombre AS ROL_Nombre
 														FROM USUARIO u
 														JOIN ROL r ON u.ROL_IdRol = r.IdRol
