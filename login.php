@@ -42,7 +42,7 @@ if(isset($_POST['usuario'])&&isset($_POST['password'])){
 
 include("conexion.php");
 
-$consulta=mysqli_query($conexion, "SELECT USUARIO.Nombre, USUARIO.EMail, ROL.IdRol, ROL.Nombre ROL_Nombre 
+$consulta=mysqli_query($conexion, "SELECT USUARIO.IdUsuario, USUARIO.Nombre, USUARIO.EMail, ROL.IdRol, ROL.Nombre ROL_Nombre 
 									FROM USUARIO 
 									INNER JOIN ROL
 										ON USUARIO.ROL_IdRol = ROL.IdRol
@@ -57,6 +57,7 @@ if(mysqli_num_rows($consulta)!=0){
 		$_SESSION['password']=$_POST['password'];
 	}
 
+	$_SESSION['idusuario']=$respuesta['IdUsuario'];
 	$_SESSION['nombre']=$respuesta['Nombre'];
 	$_SESSION['email']=$respuesta['EMail'];
 	$_SESSION['idrol']=$respuesta['IdRol'];

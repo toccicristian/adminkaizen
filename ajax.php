@@ -45,29 +45,35 @@
         $consultaEsOwner=mysqli_query($conexion, "SELECT IdUsuario FROM USUARIO WHERE USUARIO.Nombre = '$username' AND USUARIO.IdUsuario = '$ownerid'");
         $consultaOutRol=mysqli_query($conexion, "SELECT IdUsuario FROM USUARIO WHERE USUARIO.IdUsuario = '$ownerid' AND USUARIO.ROL_IdRol > '$idrol'");
         if((mysqli_num_rows($consultaEsOwner)!=0) || (mysqli_num_rows($consultaOutRol)!=0)){
-            ?>  <td class="campo-resultados">
+            ?>  
 <?php 
             if($resultado['eliminada']==1){
 ?>
+                <td class="campo-resultados">
                     <form action="restaurartarea.php" method="post">
                         <input type="hidden" name="taskid" value=<?php echo $resultado['idTarea'] ?>>
                         <button type="submit" class="btn btn-secondary">Restaurar</button>
                     </form>
+                </td>
 <?php
             }
             else{
 ?>
+                <td class="campo-resultados">
                     <form action="eliminartarea.php" method="post" >
                         <input type="hidden" name="taskid" value=<?php echo $resultado['idTarea'] ?>>
                         <button type="submit" class="btn btn-danger">Eliminar</button>
                     </form>
-                <?php
+                </td>
+                <td class="campo-resultados">
+                    <form action="asignaciontarea.php" method="post" target="_blank">
+                        <input type="hidden" name="taskid" value=<?php echo $resultado['idTarea'] ?>>
+                        <button type="submit" class="btn btn-primary" >Asignar</button>
+                    </form>
+                </td>                
+<?php
             }
-            ?>
-            </td>
-        <?php
         }
-        
 
 ?>
             </tr>
