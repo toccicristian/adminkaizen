@@ -20,8 +20,8 @@
 		var recipient = button.data('whatever')
 		var modal = $(this)
 		modal.find('.modal-title').text('Nuevo mensaje...')
-		modal.find('.modal-body input').val(recipient)
-		modal.find('.modal-body input').prop('disabled', true)
+		modal.find('#recipient-name').val(recipient)
+		modal.find('#recipient-name').prop('readonly', true)
 		})
 	})
 
@@ -89,33 +89,37 @@
 </section>
 
 <div class="modal fade" id="sendMailModal" tabindex="-1" role="dialog" aria-labelledby="sendMailModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="sendMailModalLabel">Enviar correo</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form>
-          <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Destinatario:</label>
-			<div id="destinatario"></div>
-            <input type="text" class="form-control" id="recipient-name">
-          </div>
-          <div class="form-group">
-            <label for="message-text" class="col-form-label">Mensaje:</label>
-            <textarea class="form-control" id="message-text"></textarea>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-primary">Enviar</button>
-      </div>
-    </div>
-  </div>
+	<div class="modal-dialog" role="document">
+    	<div class="modal-content">
+      		<div class="modal-header">
+        		<h5 class="modal-title" id="sendMailModalLabel">Enviar correo</h5>
+        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        	  		<span aria-hidden="true">&times;</span>
+        		</button>
+      		</div>
+      		<div class="modal-body">
+        		<form action="enviarmail.php" method="post" target="_blank">
+        			<div class="form-group">
+            			<label for="recipient-name" class="col-form-label">Destinatario:</label>
+						<div id="destinatario"></div>
+            			<input type="text" class="form-control" id="recipient-name" name="destinatario">
+          			</div>
+					<div class="form-group">
+	            		<label for="message-subject" class="col-form-label">Asunto:</label>
+            			<input type="text" class="form-control" id="message-subject" name="asunto"></textarea>
+          			</div>
+          			<div class="form-group">
+	            		<label for="message-text" class="col-form-label">Mensaje:</label>
+            			<textarea class="form-control" id="message-text" name="mensaje"></textarea>
+          			</div>
+		  			<div class="modal-footer">
+	        			<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        				<button type="submit" class="btn btn-primary">Enviar</button>
+      				</div>
+        		</form>
+    		</div>
+    	</div>
+  	</div>
 </div>
 
 
