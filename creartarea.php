@@ -41,8 +41,8 @@
 		$resultado=mysqli_fetch_array($consulta);
 		$idtarea=$resultado['idTarea'];
 
-		$consulta=mysqli_query($conexion, "INSERT INTO ASIGNACIONDETAREA (USUARIO_IdUsuario, TAREA_IdTarea, inicio, mejorFin, peorFin, idAsignador)
-				VALUES('$ownerid','$idtarea','$inicio','$mejorfin','$peorfin','$ownerid')");
+		$consulta=mysqli_query($conexion, "INSERT INTO ASIGNACIONDETAREA (USUARIO_IdUsuario, TAREA_IdTarea, idAsignador)
+				VALUES('$ownerid','$idtarea','$ownerid')");
 
 		$_SESSION['mensajesistema']="Tarea registrada a nombre de ".$username;
 

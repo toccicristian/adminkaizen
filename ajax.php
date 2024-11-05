@@ -28,6 +28,8 @@
                 <th class="campo-resultados">Inicio</th>
                 <th class="campo-resultados">Mejor Fin</th>
                 <th class="campo-resultados">Peor Fin</th>
+                <th class="campo-resultados"></th>
+                <th class="campo-resultados"></th>
             </tr>
 <?php
     while ($resultado = MySQLi_fetch_array($consulta)) {

@@ -13,6 +13,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
 
+<!-- 
 <script>
 	$(document).ready(function(e){
 		$('#sendMailModal').on('show.bs.modal', function (event) {
@@ -25,7 +26,8 @@
 		})
 	})
 
-</script>
+</script> 
+-->
 
 
 <title>Asignacion de Tarea</title>
@@ -36,7 +38,14 @@
 
 <?php
 		include('conexion.php');
-		$idtarea=$_POST['taskid'];
+
+		
+		if(isset($_SESSION['idtask'])){
+			$idtarea=$_SESSION['idtask'];
+			unset($_SESSION['idtask']);
+		}else{
+			$idtarea=$_POST['taskid'];
+		}
 
 
 		//por comodidad visual, voy a pedir Nombre, inicio, mejor fin y peor fin
@@ -53,6 +62,12 @@
 		<p>
 			Inicio : <?php echo $tarea['Inicio'] ?> 
 			/ Mejor Fin : <?php echo $tarea['MejorFin'] ?> / Peor Fin : <?php echo $tarea['PeorFin'] ?>
+			<?php 
+			if(isset($_SESSION['mensajesistema'])){
+				echo "-".$_SESSION['mensajesistema'];
+				unset($_SESSION['mensajesistema']);
+			}
+			?>
 		</p>
 
 		<article class="tabla-resultados">
@@ -62,21 +77,26 @@
 					<tr>
 						<th class="campo-resultados">Nombre</th>
 						<th class="campo-resultados">Permisos</th>
+						<th class="campo-resultados">Asignador</th>
 						<th class="campo-resultados"></th>
 					</tr>
 
 <?php
-		$consultaIdAsignados=mysqli_query($conexion,"SELECT u.IdUsuario, u.Nombre, r.Nombre AS ROL_Nombre
-		FROM USUARIO u
-		JOIN ROL r ON u.ROL_IdRol = r.IdRol
-		JOIN ASIGNACIONDETAREA a ON u.IdUsuario = a.USUARIO_IdUsuario
-		WHERE a.TAREA_IdTarea = 17;");
+
+		$consultaIdAsignados=mysqli_query($conexion,"SELECT u.IdUsuario, u.Nombre , r.Nombre AS ROL_Nombre, a.Nombre AS nombreAsignador
+													FROM USUARIO u
+													JOIN ROL r ON u.ROL_IdRol = r.IdRol
+													JOIN ASIGNACIONDETAREA asig ON u.IdUsuario = asig.USUARIO_IdUsuario
+													JOIN USUARIO a ON a.IdUsuario = asig.idAsignador
+													WHERE asig.TAREA_IdTarea = $idtarea;");
+
 		while($resultado=mysqli_fetch_array($consultaIdAsignados)){
 ?>	
 
 					<tr>
 						<td class="campo-resultados"><?php echo $resultado['Nombre']; ?></td>
 						<td class="campo-resultados"><?php echo $resultado['ROL_Nombre']; ?></td>
+						<td class="campo-resultados"><?php echo $resultado['nombreAsignador']; ?></td>
 						<td class="campo-resultados">
 							<form action="desasignar.php" method="post">
 								<input type="hidden" name="taskid" value=<?php echo $idtarea ?>>
@@ -121,7 +141,7 @@
 						<td class="campo-resultados"><?php echo $resultado['Nombre']; ?></td>
 						<td class="campo-resultados"><?php echo $resultado['ROL_Nombre']; ?></td>
 						<td class="campo-resultados">
-							<form action="desasignar.php" method="post">
+							<form action="asignartarea.php" method="post">
 								<input type="hidden" name="taskid" value=<?php echo $idtarea ?>>
 								<input type="hidden" name="userid" value=<?php echo $resultado['IdUsuario'] ?>>
 								<button type="submit" class="btn btn-primary">Asignar</button>
@@ -145,6 +165,7 @@
 ?>
 
 <!-- 
+TODO: AGREGAR LA FUNCION DE ENVIAR MENSAJES A LOS USUARIOS DESDE LA ASIGNACION DE TAREAS
 <div class="modal fade" id="sendMailModal" tabindex="-1" role="dialog" aria-labelledby="sendMailModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
