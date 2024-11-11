@@ -129,7 +129,7 @@ if(mysqli_num_rows($consulta)!=0){
 					<li><h4>Tareas asignadas</h4> 
 						<ul>
 							<li>
-								<form action="tareas.php" method="post" >
+								<form action="tareasAsignadas.php" method="post" target="_blank">
 									<input class="inline-form-button" type="submit" value="Consultar..."/>
 									<label for="solosincompletar"><input type="checkbox" name="solosincompletar">Sólo sin Completar</label>
 								</form>
