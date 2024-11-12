@@ -79,7 +79,7 @@ if(mysqli_num_rows($consulta)!=0){
 		$idrol_max=mysqli_fetch_array($consulta_idrol_max);
 
 		if((int)$_SESSION['idrol']<(int)$idrol_max['max_idrol']){
-			echo "<h3>GESTION DE USUARIOS:</h3><br />";
+			echo "<h3 class='centrado'>GESTION DE USUARIOS:</h3><br />";
 			?>
 			<ul>
 				<li>Alta de usuario:
@@ -122,8 +122,8 @@ if(mysqli_num_rows($consulta)!=0){
 		}
 
 		?>
-		<section>
-			<h3>GESTION DE TAREAS</h3>
+		<section class="formulario-edicion">
+			<h3 class="centrado">GESTION DE TAREAS</h3>
 			<article class="tareas">
 				<ul>
 					<li><h4>Tareas asignadas</h4> 

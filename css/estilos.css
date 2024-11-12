@@ -96,10 +96,23 @@ article.tabla-resultados{
     padding: 10px;
 }
 
+article.tabla-no-centrada{
+    width:100%;
+    margin:0;
+}
+
 .campo-resultados{
     text-align:left;
-    width:30%;
+    /* width:30%; */
+    width: auto;
     border-bottom: 1px solid black;
+    padding: .5rem .3rem;
+}
+
+.columna-ajustada{
+    width: 1%;
+    white-space:nowrap;
+    padding: 0 .5rem;
 }
 
 article.tareas{
@@ -110,6 +123,18 @@ article.tareas{
     border-width: thin;
     border-radius: 1%;
     margin: 1rem 1rem;
+}
+
+.formulario-edicion{
+    margin:3rem 3rem;
+
+}
+
+.formulario-fileupload{
+    width: 40rem;
+    border-style:solid;
+    border-width:thin;
+
 }
 
 /* article aside.busqueda-tareas{
@@ -179,3 +204,4 @@ article.tareas{
     font-weight:bold;
     text-decoration-line: underline;
 }
+

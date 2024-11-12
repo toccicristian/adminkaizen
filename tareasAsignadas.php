@@ -5,6 +5,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <link rel="stylesheet" href="css/estilos.css">
 
 
@@ -31,17 +33,18 @@
 		
 ?>
 		<section>
-			<h3>Tareas asignadas para Usuario <?php echo $_SESSION['nombre']; ?></h3>
+			<h3 class="centrado">Tareas asignadas para Usuario <?php echo $_SESSION['nombre']; ?></h3>
 			<article class="tabla-resultados">
 				<p>	
 					<table>
 						<tr>
 							<th class="campo-resultados">Nombre</th>
-							<th class="campo-resultados">Inicio</th>
-							<th class="campo-resultados">Mejor Fin</th>
-							<th class="campo-resultados">Peor Fin</th>							
-							<th class="campo-resultados">Asignada por</th>
+							<th class="campo-resultados columna-ajustada">Inicio</th>
+							<th class="campo-resultados columna-ajustada">Mejor Fin</th>
+							<th class="campo-resultados columna-ajustada">Peor Fin</th>							
+							<th class="campo-resultados columna-ajustada">Asignada por</th>
 							<th class="campo-resultados">Finalizada</th>
+							<th class="campo-resultados"></th>
 						</tr>
 <?php
 							$consulta=mysqli_query($conexion,
@@ -60,13 +63,19 @@
 ?>
 						<tr>
 							<td class="campo-resultados"><?php echo $resultado['Nombre']?></td>
-							<td class="campo-resultados"><?php echo $resultado['Inicio']?></td>
-							<td class="campo-resultados"><?php echo $resultado['MejorFin']?></td>
-							<td class="campo-resultados"><?php echo $resultado['PeorFin']?></td>
+							<td class="campo-resultados columna-ajustada"><?php echo $resultado['Inicio']?></td>
+							<td class="campo-resultados columna-ajustada"><?php echo $resultado['MejorFin']?></td>
+							<td class="campo-resultados columna-ajustada"><?php echo $resultado['PeorFin']?></td>
 							<td class="campo-resultados"><?php echo $resultado['AsignadorNombre']?></td>
 							<td class="campo-resultados">
 								<input type="checkbox" class="checkbox-tarea" data-id="<?php 
 								echo $resultado['idTarea'] ?>" <?php echo $checked?> ></td>
+							<td class="campo-resultados">
+								<form action="editarTarea.php" method="POST" target="_blank">
+									<input type="hidden" name="taskid" value=<?php echo $resultado['idTarea'] ?>>
+									<button type="submit" class="btn btn-primary" >EDITAR...</button>
+								</form>
+							</td>
 						</tr>
 <?php									
 								}
