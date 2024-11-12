@@ -64,7 +64,6 @@
 		</p>
 
     <article>
-        <!-- <form action="guardarCambiosEnTarea.php" class="formulario-edicion"> -->
         <form id="formNotas">
             <p><textarea maxlength=255 rows="5" cols="40" placeholder="Notas adicionales..." name="tasknotes" id="tasknotes"><?php echo $tarea['Notas']; ?></textarea></p>
             <input type="hidden" name="taskid" id="taskid" value="<?php echo $idTarea; ?>">
@@ -93,7 +92,7 @@
 
 
 <script>
-        $(document).ready(function() {
+        $(document).ready(function() {  
 
             loadDocuments();
 
@@ -114,6 +113,25 @@
                     },
                     error: function() {
                         $('#response').html('Error al subir el documento.'); 
+                    }
+                });
+            });
+        
+            // Para actualizar las notas!
+            $('#formNotas').on('submit', function(e) {
+                e.preventDefault(); 
+
+                var formData = $(this).serialize(); // Aplasto los datos del formulario
+
+                $.ajax({
+                    url: 'update_notas.php', 
+                    type: 'POST',
+                    data: formData,
+                    success: function(response) {
+                        alert(response); 
+                    },
+                    error: function() {
+                        alert('Error al actualizar las notas.'); 
                     }
                 });
             });
@@ -154,6 +172,11 @@
         }
 
     </script>
+
+    <script>
+        
+
+    </script>    
 
     </body>
 </html>
