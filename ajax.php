@@ -21,7 +21,7 @@
         
 ?>
 <section>
-    <article class="tabla-resultados">
+    <article class="tabla-resultados tabla-no-centrada">
         <table class="tabla-resultados">
             <tr>
                 <th class="campo-resultados">Nombre</th>
