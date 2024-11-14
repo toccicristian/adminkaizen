@@ -7,7 +7,9 @@ if ($conexion->connect_error) {
     die("Conexión fallida: " . $conexion->connect_error);
 }
 
-$query = "SELECT IdDocumento, Url, Detalle FROM DOCUMENTO WHERE Eliminado = 0";
+$idTarea=$_SESSION['taskid'];
+
+$query = "SELECT IdDocumento, Url, Detalle FROM DOCUMENTO WHERE Eliminado = 0 and TAREA_idTarea='$idTarea'";
 $result = $conexion->query($query);
 
 if ($result->num_rows > 0) {
