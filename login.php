@@ -89,7 +89,7 @@ if(mysqli_num_rows($consulta)!=0){
 
 
 		if((int)$_SESSION['idrol']<(int)$idrol_max['max_idrol']){
-			echo "<h3 class='centrado'>GESTION DE USUARIOS:</h3><br />";
+			echo "<h3 class='centrado'>GESTIÓN DE USUARIOS:</h3><br />";
 			?>
 			<ul>
 				<li>Alta de usuario:
@@ -130,7 +130,7 @@ if(mysqli_num_rows($consulta)!=0){
 
 
 		<section class="formulario-edicion">
-			<h4 class="centrado">Busqueda de Usuarios</h4>
+			<h4 class="centrado">Búsqueda de Usuarios</h4>
 			<article class="tareas">
 				<p>
 					<form target="_blank" action="busqueda.php" method="post" >
@@ -189,7 +189,7 @@ if(mysqli_num_rows($consulta)!=0){
 					</li>
 				</ul>
 				<aside class="busqueda-tareas">
-					<h4>Busqueda de Tareas</h4>
+					<h4>Búsqueda de Tareas</h4>
 					<input type="text" id="busquedaTareas" placeholder="Nombre de la tarea" />
 					<label for="mostrareliminadas"><input type="checkbox" id="mostrareliminadas" name="mostrareliminadas">Mostrar eliminadas</label>
 					<div id="resultadoTareas"></div>
