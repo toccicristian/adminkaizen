@@ -14,7 +14,6 @@
 	$email = $_POST['email'];
 	$rol = $_POST['nivel'];
 
-
 	include("conexion.php");
 
 	$consulta=mysqli_query($conexion, "SELECT Nombre FROM USUARIO WHERE Nombre='$usuario'");
