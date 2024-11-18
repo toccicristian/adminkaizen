@@ -47,32 +47,50 @@
 							<th class="campo-resultados"></th>
 						</tr>
 <?php
-							$consulta=mysqli_query($conexion,
-								"SELECT T.Nombre, T.Inicio, T.MejorFin, T.PeorFin, U.Nombre AsignadorNombre, T.Completada, T.idTarea
-								FROM TAREA T, USUARIO U 
-								WHERE T.idTarea IN (SELECT ASIG.TAREA_IdTarea as TAR FROM ASIGNACIONDETAREA ASIG WHERE ASIG.USUARIO_IdUsuario='$idUsuario') 
-								AND U.IdUsuario IN (SELECT ASIG.idAsignador as ASIGNADOR FROM ASIGNACIONDETAREA ASIG WHERE ASIG.USUARIO_IdUsuario='$idUsuario')
-								".$completadas);
-							if(mysqli_num_rows($consulta)!=0){
-								while($resultado=mysqli_fetch_array($consulta)){
+
+
+							$consulta="SELECT T.Nombre, T.Inicio, T.MejorFin, T.PeorFin, 
+								U.Nombre AsignadorNombre, 
+								T.Completada, T.idTarea
+							FROM ASIGNACIONDETAREA A
+							JOIN TAREA T ON A.TAREA_IdTarea = T.idTarea
+							JOIN USUARIO U ON A.idAsignador = U.idUsuario
+							WHERE A.USUARIO_IdUsuario=?
+							AND T.eliminada!=true".$completadas." ORDER BY T.Inicio DESC";
+							$consultaSegura=$conexion->prepare($consulta);
+
+							if ($consultaSegura === false) {
+							    die("Error en la preparación de la consulta: " . $conexion->error);
+}
+
+
+							$consultaSegura->bind_param("i", $idUsuario);
+							$consultaSegura->execute();
+							$resultado = $consultaSegura->get_result();
+
+
+
+
+							if($resultado->num_rows>0){
+								while($fila=$resultado->fetch_assoc()){
 
 									$checked='';
-									if($resultado['Completada']!='0'){
+									if($fila['Completada']!='0'){
 										$checked='checked';
 									}
 ?>
 						<tr>
-							<td class="campo-resultados"><?php echo $resultado['Nombre']?></td>
-							<td class="campo-resultados columna-ajustada"><?php echo $resultado['Inicio']?></td>
-							<td class="campo-resultados columna-ajustada"><?php echo $resultado['MejorFin']?></td>
-							<td class="campo-resultados columna-ajustada"><?php echo $resultado['PeorFin']?></td>
-							<td class="campo-resultados"><?php echo $resultado['AsignadorNombre']?></td>
+							<td class="campo-resultados"><?php echo $fila['Nombre']?></td>
+							<td class="campo-resultados columna-ajustada"><?php echo $fila['Inicio']?></td>
+							<td class="campo-resultados columna-ajustada"><?php echo $fila['MejorFin']?></td>
+							<td class="campo-resultados columna-ajustada"><?php echo $fila['PeorFin']?></td>
+							<td class="campo-resultados"><?php echo $fila['AsignadorNombre']?></td>
 							<td class="campo-resultados">
 								<input type="checkbox" class="checkbox-tarea" data-id="<?php 
-								echo $resultado['idTarea'] ?>" <?php echo $checked?> ></td>
+								echo $fila['idTarea'] ?>" <?php echo $checked?> ></td>
 							<td class="campo-resultados">
 								<form action="editarTarea.php" method="POST" target="_blank">
-									<input type="hidden" name="taskid" value=<?php echo $resultado['idTarea'] ?>>
+									<input type="hidden" name="taskid" value=<?php echo $fila['idTarea'] ?>>
 									<button type="submit" class="btn btn-primary" >EDITAR...</button>
 								</form>
 							</td>

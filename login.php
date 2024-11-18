@@ -59,6 +59,9 @@ if(mysqli_num_rows($consulta)!=0){
 	$_SESSION['email']=$respuesta['EMail'];
 	$_SESSION['idrol']=$respuesta['IdRol'];
 	$_SESSION['rol']=$respuesta['ROL_Nombre'];
+
+	$idUsuario=$_SESSION['idusuario'];
+
 		?>
 		<header>
 
@@ -66,7 +69,12 @@ if(mysqli_num_rows($consulta)!=0){
 		echo "<p>Bienvenid@, ".$_SESSION['nombre']."!.&nbsp Sus Permisos son de : ".$_SESSION['rol'].".</p>";
 		echo "<h3 class='centrado sombreado'>MENU PRINCIPAL</h3>";
 
+		$cuentaMensajesNuevos=mysqli_query($conexion,"SELECT COUNT(M.idMensaje) AS cantidad 
+						FROM `MENSAJES` M 
+						WHERE M.idReceptor='$idUsuario' AND LEIDO=0");
+		$resultadoMensajesNuevos=mysqli_fetch_array($cuentaMensajesNuevos);
 		?>
+			<h6>Tiene <?php echo $resultadoMensajesNuevos['cantidad']; ?> <a href="./mensajes.php" target="_blank">Mensajes</a> nuevos. </h6>
 		</header>
 		<?php
 
@@ -77,6 +85,8 @@ if(mysqli_num_rows($consulta)!=0){
 
 		$consulta_idrol_max=mysqli_query($conexion, "SELECT MAX(IdRol) AS 'max_idrol' FROM ROL");
 		$idrol_max=mysqli_fetch_array($consulta_idrol_max);
+
+
 
 		if((int)$_SESSION['idrol']<(int)$idrol_max['max_idrol']){
 			echo "<h3 class='centrado'>GESTION DE USUARIOS:</h3><br />";
@@ -110,18 +120,27 @@ if(mysqli_num_rows($consulta)!=0){
 						<label for="confirmabaja"><input type="checkbox" name="confirmabaja">Confirma Baja</label>
 					</form>
 				</li>
-				<li>Busqueda de Usuarios
-					<form target="_blank" action="busqueda.php" method="post" >
-						<input type="text" maxlength=12 placeholder="Nombre de usuario" name="usuario" required />
-						<input class="inline-form-button" type="submit" value="Buscar"/><br />
-					</form>
-				</li>
+
 			</ul>
 
 			<?php
 		}
 
 		?>
+
+
+		<section class="formulario-edicion">
+			<h4 class="centrado">Busqueda de Usuarios</h4>
+			<article class="tareas">
+				<p>
+					<form target="_blank" action="busqueda.php" method="post" >
+						<input type="text" maxlength=12 placeholder="Nombre de usuario" name="usuario" required />
+						<input class="inline-form-button" type="submit" value="Buscar"/><br />
+					</form>
+				</p>
+			</article>
+		</section>
+
 		<section class="formulario-edicion">
 			<h3 class="centrado">GESTION DE TAREAS</h3>
 			<article class="tareas">

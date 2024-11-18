@@ -21,9 +21,10 @@ $asunto=$_POST['asunto'];
 
 $mensaje=$_POST['mensaje'];
 
-
+/*
 $mensaje="Nombre: ".$nombre." Email: ".$email." Mensaje: ".$_POST['mensaje'];
 $header="From: ".$nombre."<".$email.">";
+
 
 $enviado = mail($destino,$asunto,$mensaje,$header);
 
@@ -32,7 +33,7 @@ if($enviado == true){
 }else{
 	echo "Hubo un error en el envio del mail. Posiblemente el servidor smtp se encuentra offline o no ha sido configurado.";
 }
-
+*/
 
 
 // $consulta=mysqli_query($conexion, "INSERT INTO contactos VALUES ('','$nombre','$email','$localidad','$comentario')");
@@ -43,7 +44,7 @@ $respuesta=mysqli_fetch_array($consulta);
 $idReceptor=$respuesta['IdUsuario'];
 
 $consulta = mysqli_query($conexion, "INSERT INTO MENSAJES (idRemitente,idReceptor,asunto,cuerpo)VALUES ( '$idRemitente','$idReceptor','$asunto','$mensaje')") or die(mysqli_error($conexion));
-
+echo "Mensaje Enviado";
 ?>
 </body>
 </html>
