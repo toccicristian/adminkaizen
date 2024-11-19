@@ -15,27 +15,31 @@
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <link rel="stylesheet" href="css/estilos.css">
-<title>Admin Kaizen - Login de Usuarios</title>
+<title>Admin Kaizen - Dashboard</title>
 </head>
 
 <body>
 
 <?php
 
-if ((!isset($_POST['usuario']) || !isset($_POST['password'])) && (!isset($_SESSION['usuario']) || !isset($_SESSION['password'])))
-{
-	header("Location:./index.php");
-	exit();
-}
+// if ((!isset($_POST['usuario']) || !isset($_POST['password'])) && (!isset($_SESSION['usuario']) || !isset($_SESSION['password'])))
+// {
+// 	header("Location:./index.php");
+// 	exit();
+// }
 
-if(isset($_POST['usuario'])&&isset($_POST['password'])){
-	$usuario = $_POST['usuario'];
-	$password = md5($_POST['password']);
-}elseif((isset($_SESSION['usuario'])&&isset($_SESSION['password']))){
-	$usuario = $_SESSION['usuario'];
-	$password = md5($_SESSION['password']);
-}
+// if(isset($_POST['usuario'])&&isset($_POST['password'])){
+// 	$usuario = $_POST['usuario'];
+// 	$password = md5($_POST['password']);
+// }elseif((isset($_SESSION['usuario'])&&isset($_SESSION['password']))){
+// 	$usuario = $_SESSION['usuario'];
+// 	$password = md5($_SESSION['password']);
+// }
 
+
+if (isset($_SESSION['usuario'])){
+	$usuario=$_SESSION['usuario'];
+}
 
 include("conexion.php");
 
@@ -43,16 +47,16 @@ $consulta=mysqli_query($conexion, "SELECT USUARIO.IdUsuario, USUARIO.Nombre, USU
 									FROM USUARIO 
 									INNER JOIN ROL
 										ON USUARIO.ROL_IdRol = ROL.IdRol
-									WHERE USUARIO.Nombre='$usuario' AND USUARIO.Clave='$password'");
+									WHERE USUARIO.Nombre='$usuario'");
 //le puse ROL_Nombre a la columna ROL.Nombre porque la tabla usuario tenia una columna Nombre.
 
 if(mysqli_num_rows($consulta)!=0){
 	$respuesta=mysqli_fetch_array($consulta);
 	
-	if(!isset($_SESSION['usuario']) && !isset($_SESSION['password'])){
-		$_SESSION['usuario']=$respuesta['Nombre'];
-		$_SESSION['password']=$_POST['password'];
-	}
+	// if(!isset($_SESSION['usuario']) && !isset($_SESSION['password'])){
+	// 	$_SESSION['usuario']=$respuesta['Nombre'];
+	// 	$_SESSION['password']=$_POST['password'];
+	// }
 
 	$_SESSION['idusuario']=$respuesta['IdUsuario'];
 	$_SESSION['nombre']=$respuesta['Nombre'];

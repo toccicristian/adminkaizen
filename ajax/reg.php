@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('conexion.php');
+include('../conexion.php');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['usuario']) && isset($_POST['clave']) && isset($_POST['email']) && isset($_POST['nivel'])) {
