@@ -14,6 +14,19 @@ ul li{
     margin:2em 0;
 }
 
+.btn-transparent {
+    background-color: transparent; /* Fondo transparente */
+    border: 1px solid #007bff; /* Color del borde */
+    color: #007bff; /* Color del texto  */
+}
+
+.btn-transparent:hover {
+    background-color: rgba(0, 123, 255, 0.1); /* Color de fondo al pasar el mouse */
+    color: #0056b3; /* Color del texto al pasar el mouse */
+}
+
+
+
 .navbar{
     display:flex;
     justify-content: space-between;
