@@ -30,10 +30,18 @@
                 </button>
 				<!-- <a href="./form_login.php" class="menu-item">Iniciar sesión</a> -->
 			</div>
+
+			<div class="isologo-small text-right">
+				<p class="isotipo-index">Admin Kaizen</p>
+				<a href="./index.php">
+					<img class="main-logo-small" src="./imagenes/logo-200px.png" alt="adminkaizen logo">
+				</a>
+    		</div>
+<!--             
 			<div class="isologo-small">
 				<a href="./index.php"><img class="main-logo-small" src="./imagenes/logo-200px.png" alt="adminkaizen logo"></img></a>
 				<p class="isotipo-index">Admin Kaizen</p>
-			</div>
+			</div> -->
 
 		</nav>
     </header>
