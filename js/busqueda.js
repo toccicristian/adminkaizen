@@ -56,29 +56,6 @@
     });
 
 
-        // $("#busquedaUsuarios").keyup(function() {//llamo a esta funcion cuando se presiona una tecla en el elemento de id search
-        //     var mostrarborrados =$('#mostrareliminados').is(':checked');
-        //     var nombre = $('#busquedaUsuarios').val();
-        //     if (nombre == "") {
-        //         $("#resultadoUsuarios").html(""); //si el input de id search esta vacio, se limpian los resultados
-        //     }
-        //     else {
-        //         $.ajax({ //armo con AJAX un array de post con llave search que contiene nombre, se la paso a ajax.php
-        //             type: "POST",
-        //             url: "../ajax/buscaUsuarios.php",
-        //             data: {
-        //                 search: nombre,
-        //                 mostrareliminados: mostrarborrados
-        //             },
-        //             //y además llamo a esta funcion que altera el contenido del div de id display
-        //             success: function(html) {
-        //                 $("#resultadoUsuarios").html(html).show();
-        //             }
-        //         });
-        //     }
-        // });
-
-
 
 
         });

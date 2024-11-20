@@ -99,24 +99,13 @@ if(mysqli_num_rows($consulta)!=0){
 		<?php
 
 			if((int)$_SESSION['idrol']<(int)$idrol_max['max_idrol']){
-				echo "<h3 class='centrado'>GESTIÓN DE USUARIOS:</h3><br />";
+				// echo "<h3 class='centrado'>GESTIÓN DE USUARIOS:</h3><br />";
 				?>
-				<ul>
-					<li>
+						<h3 class='centrado'>GESTIÓN DE USUARIOS</h3>
 						<button type="button" class="btn btn-outline-primary mx-4" data-toggle="modal" data-target="#altaModal">	
                     	        Alta
                 		</button>
-					</li>
-			
-					<li>Baja de Usuario 
-						<form action="baja.php" method="post" >
-							<input type="text" maxlength=12 placeholder="Nombre de usuario" name="usuario" required />
-							<input class="inline-form-button" type="submit" value="Dar Baja"/><br />
-							<label for="confirmabaja"><input type="checkbox" name="confirmabaja">Confirma Baja</label>
-						</form>
-					</li>
 
-				</ul>
 
 				<?php
 			}
@@ -124,24 +113,15 @@ if(mysqli_num_rows($consulta)!=0){
 			?>
 
 			<section class="busqueda-usuarios">
-						<h4>Búsqueda de Usuarios</h4>
-						<input type="text" id="busquedaUsuarios" placeholder="Nombre de usuario" />
+				<!-- <h4 class="centrado">Búsqueda de Usuarios</h4> -->
+				<article class="usuarios">
+					<p class="campo-busqueda">
+						<input type="text" id="busquedaUsuarios" placeholder="Nombre de usuario a buscar" />
 						<label for="mostrareliminados"><input type="checkbox" id="mostrareliminados" name="mostrareliminados">Mostrar eliminados</label>
-						<div id="resultadoUsuarios"></div>
-			</section>
-
-
-
-			<section class="formulario-edicion">
-				<h4 class="centrado">Búsqueda de Usuarios</h4>
-				<article class="tareas">
-					<p>
-						<form target="_blank" action="busqueda.php" method="post" >
-							<input type="text" maxlength=12 placeholder="Nombre de usuario" name="usuario" required />
-							<input class="inline-form-button" type="submit" value="Buscar"/><br />
-						</form>
 					</p>
+					<div class="resultadoUsuarios" id="resultadoUsuarios"></div>
 				</article>
+
 			</section>
 		</div>
 
