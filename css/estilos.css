@@ -14,28 +14,25 @@ ul li{
     margin:2em 0;
 }
 
+
+
+
 .navbar{
     display:flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    margin: 0 2rem;
+    margin: 0;
 }
 
-.navbar .menu, .navbar .isologo-small{
+.navbar .menu, .navbar{
     display:flex;
     align-items:center;    
 }
 
-.navbar .menu .menu-item{
+.menu .menu-item{
     margin: 0 2rem;
     color: black;
     text-decoration:none;
-}
-
-.navbar .menu .menu-item:hover{
-    text-shadow: 0 0 .65px #333, 0 0 .65px #333;
-    transition:0.2s;
-
 }
 
 .navbar .menu{
@@ -43,34 +40,46 @@ ul li{
     flex-wrap: wrap;
 }
 
-.navbar .isologo-small{
-    flex-direction: row-reverse;
-    flex-wrap: wrap;
+.isologo-small {
+    display: flex;
+    align-items: center; 
+    justify-content: flex-end; 
+    margin-bottom: 20px; 
+}
+
+.isotipo-index {
+    margin-right: 10px; 
+    font-weight: bold; 
+}
+
+.main-logo-small {
+    width: 70%; 
+    height: auto; 
 }
 
 
-.isotipo-index{
-    display: inline;
-    white-space:nowrap;
-    text-align:center;
-    margin-right:1em;
+.alert {
+    font-size: 1.1em; /* Aumenta el tamaño de la fuente */
+    border-radius: 5px; /* Bordes redondeados */
 }
 
-.main-logo-small{
-    display: inline;
-    margin-left:auto;
-    margin-right:auto;
-}
+
+
+
+
+
+
 
 header{
-    margin-bottom:4em;
+    margin-bottom:2em;
 }
 
 .seccion-inicio{
     display:flex;
     align-items: flex-start;
     flex-wrap:wrap;
-    margin: 5rem 0;
+    justify-content:space-between;
+    margin: 0;
     padding: 2rem 2rem;
     background-image: linear-gradient(to right,white 0%, grey 95%);
 }
@@ -90,11 +99,14 @@ header{
   
 }
 
+
 article.tabla-resultados{
     width:60%;
     margin:0 auto;
     padding: 10px;
+    display:block;
 }
+
 
 article.tabla-no-centrada{
     width:100%;
@@ -103,7 +115,6 @@ article.tabla-no-centrada{
 
 .campo-resultados{
     text-align:left;
-    /* width:30%; */
     width: auto;
     border-bottom: 1px solid black;
     padding: .5rem .3rem;
@@ -115,14 +126,23 @@ article.tabla-no-centrada{
     padding: 0 .5rem;
 }
 
-article.tareas{
+article{
     display:flex;
+}
+
+article.tareas{
     flex-direction:row;
     justify-content: space-evenly;
     border-style: solid;
     border-width: thin;
     border-radius: 1%;
     margin: 1rem 1rem;
+}
+
+article.usuarios{
+    flex-direction:column;
+    align-items:center;
+
 }
 
 .formulario-edicion{
@@ -137,14 +157,8 @@ article.tareas{
 
 }
 
-/* article aside.busqueda-tareas{
-    margin-left:2rem;
-    background-color:red;
-} */
-
 .icono{
     height:2rem;
-    /* margin-left:4rem; */
 }
 
 
@@ -204,4 +218,3 @@ article.tareas{
     font-weight:bold;
     text-decoration-line: underline;
 }
-

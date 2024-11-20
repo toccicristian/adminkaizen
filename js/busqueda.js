@@ -5,7 +5,7 @@
         $('#busquedaTareas').val(Value);
         $('#resultadoTareas').hide();
        }
-       $(document).ready(function() {
+    $(document).ready(function() {
          $("#busquedaTareas").keyup(function() {//llamo a esta funcion cuando se presiona una tecla en el elemento de id search
             var mostrarborradas =$('#mostrareliminadas').is(':checked');
             var nombre = $('#busquedaTareas').val();
@@ -27,4 +27,35 @@
                 });
             }
         });
+
+
+
+    $(document).ready(function() {
+        $("#busquedaUsuarios").keyup(function() {
+            var mostrarborrados = $('#mostrareliminados').is(':checked');
+            var nombre = $('#busquedaUsuarios').val();
+            if (nombre == "") {
+                $("#resultadoUsuarios").html(""); // Limpia los resultados si el input está vacío
+            } else {
+                $.ajax({
+                    type: "POST",
+                    url: "ajax/buscaUsuarios.php", // Asegúrate de que esta URL sea correcta
+                    data: {
+                        search: nombre,
+                        mostrareliminados: mostrarborrados
+                    },
+                    success: function(html) {
+                        $("#resultadoUsuarios").html(html).show();
+                    },
+                    error: function() {
+                        $("#resultadoUsuarios").html("Error al cargar los usuarios."); // Manejo de errores
+                    }
+                });
+            }
+        });
+    });
+
+
+
+
         });
