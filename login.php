@@ -12,30 +12,19 @@
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script type="text/javascript" src="./js/busqueda.js"></script>
 
-
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <link rel="stylesheet" href="css/estilos.css">
+
+
+
+
+
 <title>Admin Kaizen - Dashboard</title>
 </head>
 
 <body>
 
 <?php
-
-// if ((!isset($_POST['usuario']) || !isset($_POST['password'])) && (!isset($_SESSION['usuario']) || !isset($_SESSION['password'])))
-// {
-// 	header("Location:./index.php");
-// 	exit();
-// }
-
-// if(isset($_POST['usuario'])&&isset($_POST['password'])){
-// 	$usuario = $_POST['usuario'];
-// 	$password = md5($_POST['password']);
-// }elseif((isset($_SESSION['usuario'])&&isset($_SESSION['password']))){
-// 	$usuario = $_SESSION['usuario'];
-// 	$password = md5($_SESSION['password']);
-// }
-
 
 if (isset($_SESSION['usuario'])){
 	$usuario=$_SESSION['usuario'];
@@ -53,11 +42,6 @@ $consulta=mysqli_query($conexion, "SELECT USUARIO.IdUsuario, USUARIO.Nombre, USU
 if(mysqli_num_rows($consulta)!=0){
 	$respuesta=mysqli_fetch_array($consulta);
 	
-	// if(!isset($_SESSION['usuario']) && !isset($_SESSION['password'])){
-	// 	$_SESSION['usuario']=$respuesta['Nombre'];
-	// 	$_SESSION['password']=$_POST['password'];
-	// }
-
 	$_SESSION['idusuario']=$respuesta['IdUsuario'];
 	$_SESSION['nombre']=$respuesta['Nombre'];
 	$_SESSION['email']=$respuesta['EMail'];
@@ -118,27 +102,12 @@ if(mysqli_num_rows($consulta)!=0){
 				echo "<h3 class='centrado'>GESTIÓN DE USUARIOS:</h3><br />";
 				?>
 				<ul>
-					<li>Alta de usuario:
-						<form action="registro.php" method="post" >
-
-							<input type="text" maxlength=12 placeholder="Nombre de usuario" name="usuario" required />
-							<input type="password" maxlength=12 placeholder="Clave" name="clave" required />
-							<input type="email" maxlength=80 placeholder="Correo" name="email" required />
-							<select name="nivel">
-								<?php 
-								$consulta_niveles=mysqli_query($conexion, "SELECT IdRol, Nombre FROM ROL");
-								$resultado_niveles=mysqli_num_rows($consulta_niveles);
-								while($resultado_niveles=mysqli_fetch_array($consulta_niveles)){
-									if (($resultado_niveles['IdRol']>$_SESSION['idrol'])||($_SESSION['idrol']==1)){
-										?><option <?php if ($resultado_niveles['IdRol']==5){echo "selected";}?>><?php echo $resultado_niveles['Nombre']?></option><?php
-									}
-								}
-								?> 
-							</select>
-							<input class="inline-form-button" type="submit" value="Registrar"/>
-						</form>
-
+					<li>
+						<button type="button" class="btn btn-outline-primary mx-4" data-toggle="modal" data-target="#altaModal">	
+                    	        Alta
+                		</button>
 					</li>
+			
 					<li>Baja de Usuario 
 						<form action="baja.php" method="post" >
 							<input type="text" maxlength=12 placeholder="Nombre de usuario" name="usuario" required />
@@ -153,6 +122,14 @@ if(mysqli_num_rows($consulta)!=0){
 			}
 
 			?>
+
+			<section class="busqueda-usuarios">
+						<h4>Búsqueda de Usuarios</h4>
+						<input type="text" id="busquedaUsuarios" placeholder="Nombre de usuario" />
+						<label for="mostrareliminados"><input type="checkbox" id="mostrareliminados" name="mostrareliminados">Mostrar eliminados</label>
+						<div id="resultadoUsuarios"></div>
+			</section>
+
 
 
 			<section class="formulario-edicion">
@@ -234,6 +211,110 @@ if(mysqli_num_rows($consulta)!=0){
 		<a href="logout.php">CERRAR SESIÓN</a>
 	</p>
 			
+
+			<!-- MODAL PARA ALTA DE USUARIOS -->
+
+    <div class="modal fade" id="altaModal" tabindex="-1" role="dialog" aria-labelledby="altaModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+    	<div class="modal-content">
+      		<div class="modal-header">
+        		<h5 class="modal-title" id="altaModalLabel">Alta de Usuario</h5>
+        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        	  		<span aria-hidden="true">&times;</span>
+        		</button>
+      		</div>
+      		<div class="modal-body">
+        		<form id="formAlta">
+        			<div class="form-group">
+            			<label for="usuario" class="col-form-label">Usuario:</label>
+						<div id="nombre-usuario"></div>
+            			<input type="text" maxlength=12 placeholder="Nombre de usuario" required class="form-control" id="usuario" name="usuario">
+          			</div>
+					<div class="form-group">
+	            		<label for="clave" class="col-form-label">Clave:</label>
+            			<input type="password"  maxlength=12 placeholder="Clave" required class="form-control" id="clave" name="clave"></input>
+          			</div>
+                      <div class="form-group">
+	            		<label for="email" class="col-form-label">Email:</label>
+            			<input type="text" maxlength=80 placeholder="Correo" required class="form-control" id="email" name="email"></input>
+                    </div>
+
+                    <div class="form-group">
+						<label for="nivel" class="col-form-label">Credenciales:</label>
+						<select name="nivel" id=nivel class="form-control">
+									<?php 
+									$consulta_niveles=mysqli_query($conexion, "SELECT IdRol, Nombre FROM ROL");
+									$resultado_niveles=mysqli_num_rows($consulta_niveles);
+									while($resultado_niveles=mysqli_fetch_array($consulta_niveles)){
+										if (($resultado_niveles['IdRol']>$_SESSION['idrol'])||($_SESSION['idrol']==1)){
+											?><option <?php if ($resultado_niveles['IdRol']==5){echo "selected";}?>><?php echo $resultado_niveles['Nombre']?></option><?php
+										}
+									}
+									?> 
+								</select>
+                    </div>            
+
+		  			<div class="modal-footer">
+	        			<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        				<button type="submit" class="btn btn-primary">Registrarse</button>
+      				</div>
+        		</form>
+    		</div>
+    	</div>
+  	</div>
+    </div>
+
+
+
+									<!-- MODAL PARA ENVIAR MENSAJES A USUARIOS -->
+
+    <div class="modal fade" id="sendMailModal" tabindex="-1" role="dialog" aria-labelledby="sendMailModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+    	<div class="modal-content">
+      		<div class="modal-header">
+        		<h5 class="modal-title" id="sendMailModalLabel">Enviar correo</h5>
+        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        	  		<span aria-hidden="true">&times;</span>
+        		</button>
+      		</div>
+      		<div class="modal-body">
+        		<form action="enviarmail.php" method="post" target="_blank">
+        			<div class="form-group">
+            			<label for="recipient-name" class="col-form-label">Destinatario:</label>
+						<div id="destinatario"></div>
+            			<input type="text" class="form-control" id="recipient-name" name="destinatario">
+          			</div>
+					<div class="form-group">
+	            		<label for="message-subject" class="col-form-label">Asunto:</label>
+            			<input type="text" class="form-control" id="message-subject" name="asunto"></textarea>
+          			</div>
+          			<div class="form-group">
+	            		<label for="message-text" class="col-form-label">Mensaje:</label>
+            			<textarea class="form-control" id="message-text" name="mensaje"></textarea>
+          			</div>
+		  			<div class="modal-footer">
+	        			<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        				<button type="submit" class="btn btn-primary">Enviar</button>
+      				</div>
+        		</form>
+    		</div>
+    	</div>
+  	</div>
+</div>
+
+
+
+
+
+
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+
+
 		<?php
 
 }else{
@@ -244,7 +325,6 @@ if(mysqli_num_rows($consulta)!=0){
 }
 
 ?>
-
 
 <script>
 	function showSection(section) {
@@ -264,6 +344,81 @@ if(mysqli_num_rows($consulta)!=0){
 		showSection('usuarios');
 	});
 </script>
+
+<script>
+    $(document).ready(function(){
+        $('#formAlta').on('submit', function(e) {
+            e.preventDefault(); 
+
+            var formData = $(this).serialize(); // Aplasto los datos del formulario
+
+            $.ajax({
+                url: 'ajax/reg.php', 
+                type: 'POST',
+                data: formData,
+                success: function(response) {
+                    alert(response); 
+                },
+                error: function() {
+                    alert('Error al dar el alta al usuario.'); 
+                }
+            });
+        });
+    });
+
+</script>
+
+
+<script>
+
+
+	function loadUsers() {	
+				var mostrarEliminados = $('#mostrareliminados').is(':checked') ? 'true' : 'false';
+				var busqueda = $('#busquedaUsuarios').val();
+				$.ajax({
+					url: 'ajax/fetchUsers.php', 
+					type: 'POST',
+					data: {
+						mostrareliminados: mostrarEliminados, // Asegúrate de que el nombre coincida
+						busqueda: busqueda // Si necesitas enviar el valor de búsqueda
+					},
+					success: function(data) {
+						$('#resultadoUsuarios').html(data); 
+					},
+					error: function() {
+						$('#resultadoUsuarios').html('Error al cargar los usuarios.'); 
+					}
+				});
+			}
+
+	function deleteUser(id) {
+		if (confirm("Está seguro de que desea eliminar este usuario?")){
+			$.ajax({
+			url: 'ajax/baja.php', 
+			type: 'POST',
+			data: { id: id },
+			success: function(response) {
+				alert(response); 
+				loadUsers(); 
+			},
+			error: function() {
+				alert('Error al eliminar el usuario.'); 
+			}
+		});                
+		}
+		else{
+			alert("El usuario no ha sido eliminado.");
+		}
+
+	}
+
+
+</script>
+
+
+
+
+
 
 </body>
 </html>

@@ -183,7 +183,7 @@
                     alert(response); 
                 },
                 error: function() {
-                    alert('Error al actualizar las notas.'); 
+                    alert('Error al darse el alta.'); 
                 }
             });
         });
