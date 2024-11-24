@@ -8,6 +8,10 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- <link href="https://fonts.googleapis.com/css2?family=Kumar+One&display=swap" rel="stylesheet"> -->
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Kumar+One&family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+
+
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <link rel="stylesheet" href="css/estilos.css">
@@ -62,8 +66,8 @@
                 <p class="producto-descripcion">
                     <h3>Plataforma de gestión de actividades</h3>
                     <p>
-                        Admin Kaizen es una plataforma de administración de actividades diseñada 
-                        para optimizar la coordinación y gestión jerarquica de proyectos. 
+                        <span class="iso-font">Admin Kaizen</span> es una plataforma de administración de actividades diseñada 
+                        para optimizar la coordinación y gestión jerárquica de proyectos. 
                         Ofrece una interfaz intuitiva y fácil de usar, que permite a los usuarios gestionar tareas, 
                         programar eventos, asignar recursos y supervisar el progreso de los proyectos en tiempo real. 
                     </p>
@@ -74,6 +78,19 @@
             </aside> 
         </section>
     </article>
+
+
+    <footer>
+        <div class="contacto">
+            <p>
+                
+            </p>
+        </div>
+        <div class="copyright centrado">
+            <p> © Realizado por Tocci, Cristian</p>
+        </div>
+    </footer>
+
 
 
     <?php include('conexion.php'); ?>
