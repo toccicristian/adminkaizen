@@ -20,7 +20,14 @@ ul li{
     margin:2em 0;
 }
 
-
+.modal-content{
+    background-color:var(--color-estandar);
+    font-family: "Comfortaa", sans-serif;
+    font-optical-sizing: auto;
+    font-weight:400;
+    font-style: normal;
+    margin-top:1.7rem;    
+}
 
 
 .navbar{
@@ -124,18 +131,36 @@ ul li{
  section aside{
     min-width:200px;
     width: 50%;
-    /* margin-left:2rem; */
-
     margin-top:2rem;
   
 }
 
+.gestion-usuarios{
+    width:35rem;
+    min-height:100rem;
+    display:flex;
+    flex-direction:column;
+    flex-wrap:wrap;
+    margin-left:auto;
+    margin-right:auto;
+    row-gap:1rem;
+
+
+}
+
+.resultadoUsuarios{
+    width:30rem;
+}
 
 article.tabla-resultados{
-    width:60%;
+    width:30rem;
     margin:0 auto;
     padding: 10px;
     display:block;
+}
+
+table.tabla-resultados{
+    width:30rem;
 }
 
 
@@ -143,6 +168,17 @@ article.tabla-no-centrada{
     width:100%;
     margin:0;
 }
+
+.campo-busqueda{
+    width:80%;
+    display:flex;
+    flex-direction:column;
+}
+
+.search-input{
+    width:100%;
+}
+
 
 .campo-resultados{
     text-align:left;

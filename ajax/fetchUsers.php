@@ -8,15 +8,27 @@ if ($conexion->connect_error) {
 
 <section>
     <article class="tabla-resultados tabla-no-centrada">
-        <table class="tabla-resultados">
-            <tr>
+        <!-- <table class="tabla-resultados"> -->
+            <!-- <tr>
                 <th class="campo-resultados">Nombre</th>
                 <th class="campo-resultados">Credenciales</th>
                 <th class="campo-resultados"></th>
                 <th class="campo-resultados"></th>
                 <th class="campo-resultados"></th>
-            </tr>
-<?php
+            </tr> -->
+
+            <table class="table table-striped">
+                <thead class="thead-light">
+                    <tr>
+                        <th class="campo-resultados">Nombre</th>
+                        <th class="campo-resultados">Credenciales</th>
+                        <th class="campo-resultados"></th>
+                        <th class="campo-resultados"></th>
+                        <th class="campo-resultados"></th>
+                    </tr>
+                </thead>
+                <tbody>
+            <?php
     $consulta=mysqli_query($conexion,"SELECT U.IdUsuario, U.Nombre, U.EMail, U.eliminado, U.ROL_IdRol, R.Nombre as ROL_Nombre
                                     FROM USUARIO U
                                     JOIN ROL R ON U.ROL_IdRol=R.IdRol");
@@ -53,6 +65,9 @@ if ($conexion->connect_error) {
 <?php
     }}
 ?>
+            </tbody>
+
+
         </table>
     </article>
 </section>

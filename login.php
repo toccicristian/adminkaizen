@@ -105,12 +105,26 @@ if(mysqli_num_rows($consulta)!=0){
 		<?php
 
 			if((int)$_SESSION['idrol']<(int)$idrol_max['max_idrol']){
-				// echo "<h3 class='centrado'>GESTIÓN DE USUARIOS:</h3><br />";
 				?>
-						<h3 class='centrado'>GESTIÓN DE USUARIOS</h3>
-						<button type="button" class="btn btn-outline-primary mx-4" data-toggle="modal" data-target="#altaModal">	
-                    	        Alta de Empleado
-                		</button>
+						<div class="gestion-usuarios">
+							<h3 class='centrado'>GESTIÓN DE USUARIOS</h3>
+							<button type="button" class="btn btn-outline-primary mx-4" data-toggle="modal" data-target="#altaModal">	
+									Alta de Empleado
+							</button>
+
+							<section class="busqueda-usuarios">				
+								<article class="usuarios">
+									<p class="campo-busqueda">
+										<input type="text" id="busquedaUsuarios" class="search-input" placeholder="Nombre de usuario a buscar" />
+										<label for="mostrareliminados"><input type="checkbox" id="mostrareliminados" name="mostrareliminados">Mostrar eliminados</label>
+									</p>
+									<div class="resultadoUsuarios" id="resultadoUsuarios"></div>
+								</article>
+							</section>
+
+
+
+						</div>
 
 
 				<?php
@@ -118,17 +132,7 @@ if(mysqli_num_rows($consulta)!=0){
 
 			?>
 
-			<section class="busqueda-usuarios">
-				<!-- <h4 class="centrado">Búsqueda de Usuarios</h4> -->
-				<article class="usuarios">
-					<p class="campo-busqueda">
-						<input type="text" id="busquedaUsuarios" placeholder="Nombre de usuario a buscar" />
-						<label for="mostrareliminados"><input type="checkbox" id="mostrareliminados" name="mostrareliminados">Mostrar eliminados</label>
-					</p>
-					<div class="resultadoUsuarios" id="resultadoUsuarios"></div>
-				</article>
 
-			</section>
 		</div>
 
 		<div id="tareas" class="tab-content" style="display: none;">		
