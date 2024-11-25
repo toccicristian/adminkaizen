@@ -304,7 +304,7 @@ if(mysqli_num_rows($consulta)!=0){
         		</button>
       		</div>
       		<div class="modal-body">
-        		<form action="enviarmail.php" method="post" target="_blank">
+        		<form id="sendMailForm">
         			<div class="form-group">
             			<label for="recipient-name" class="col-form-label">Destinatario:</label>
 						<div id="destinatario"></div>
@@ -439,6 +439,27 @@ if(mysqli_num_rows($consulta)!=0){
 
 </script>
 
+<script>
+    
+    $(document).on('submit','#sendMailForm',function(e){
+        e.preventDefault();
+   
+        $.ajax({
+            method:"POST",
+            url: "ajax/enviarmail.php",
+            data:$(this).serialize(),
+            success: function(data){
+					alert(data);
+                // if(data === 'exito') {
+				// 	alert('El mensaje se ha enviado con éxito');
+					// $('#formLogin').find('input').val('');
+                // } else {
+                //     alert(data); 
+                // }     
+            }});
+    });
+
+</script>
 
 
 
