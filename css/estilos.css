@@ -223,6 +223,11 @@ article.tabla-no-centrada{
     margin:0;
 }
 
+
+.busqueda-tareas{
+    margin-top:2rem;
+}
+
 .resultado-tareas{
     width:100%;
 }
