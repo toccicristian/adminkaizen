@@ -1,8 +1,14 @@
 :root{
     --color-estandar:#abe6ff;
+
 }
 
-
+body{
+    font-family: "Comfortaa", sans-serif;
+    font-optical-sizing: auto;
+    font-weight:400;
+    font-style: normal;
+}
 
 h1{
     display:none;
@@ -27,6 +33,10 @@ ul li{
     font-weight:400;
     font-style: normal;
     margin-top:1.7rem;    
+}
+
+#loginMensaje{
+    display:block;
 }
 
 
@@ -80,14 +90,24 @@ ul li{
 
 .seccion-inicio{
     min-height:1000px;
+    margin: 0;
+    /* padding: 2rem 2rem; */
+    padding: 2rem 0;
+    background-image: linear-gradient(to top,white 0%, var(--color-estandar) 95%);
+    width:100%;
+
+}
+
+.transparencia{
+    background-color:rgba(255,255,255,0.5);
+    width:100%;
     display:flex;
     align-items: flex-start;
     flex-wrap:wrap;
     justify-content:space-between;
-    margin: 0;
-    padding: 2rem 2rem;
-    background-image: linear-gradient(to top,white 0%, var(--color-estandar) 95%);
+    padding:2rem 0;
 }
+
 
 .isotipo-index{
     margin:1rem 0 0;
@@ -131,8 +151,18 @@ ul li{
  section aside{
     min-width:200px;
     width: 50%;
-    margin-top:2rem;
+    /* margin-top:2rem; */
   
+}
+
+
+.alert{
+    margin-bottom:0;
+}
+
+.area-usuarios{
+    padding-top:2rem;
+    background-image: linear-gradient(to top,white 0%, var(--color-estandar) 95%);
 }
 
 .gestion-usuarios{
@@ -144,8 +174,10 @@ ul li{
     margin-left:auto;
     margin-right:auto;
     row-gap:1rem;
+}
 
-
+#mostrareliminados{
+    margin-top:1rem;
 }
 
 .resultadoUsuarios{
@@ -232,6 +264,8 @@ article.usuarios{
 .producto-screenshot{
     max-width:100%;
     height: auto;
+    margin-left:auto;
+    margin-right:auto;
 }
 
 .mensaje-sistema{

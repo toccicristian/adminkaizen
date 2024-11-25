@@ -62,31 +62,38 @@
         ?>        
         </section>
         <section class="seccion-inicio">
-            <div class="producto-detalles">
-                <p class="producto-descripcion">
-                    <h3>Plataforma de gestión de actividades</h3>
-                    <p>
-                        Con <span class="iso-font">Admin Kaizen</span> optimice la coordinación y gestión jerárquica 
-                        de sus proyectos de una forma fácil e intuitiva.
+            <div class="transparencia">
+                <div class="producto-detalles">
+                    <p class="producto-descripcion">
+                        <h3>Plataforma de gestión de actividades</h3>
+                        <p>
+                            Con <span class="iso-font">Admin Kaizen</span> optimice la coordinación y gestión jerárquica 
+                            de sus proyectos de una forma fácil e intuitiva.
+                        </p>
                     </p>
-                </p>
-            </div>
-            <aside>
-                <img src="./imagenes/preview.png" alt="screenshot del producto" class="producto-screenshot">
-            </aside> 
+                </div>
+                <aside>
+                    <img src="./imagenes/preview.png" alt="screenshot del producto" class="producto-screenshot">
+                </aside>
+            </div> 
         </section>
     </article>
 
 
     <footer>
-        <div class="contacto">
-            <p>
-                
-            </p>
-        </div>
         <div class="copyright centrado">
-            <p> © Realizado por Tocci, Cristian</p>
+            <p> © Realizado por Tocci, Cristian <br /> Todos los derechos reservados. </p>
         </div>
+        <div class="contacto">
+            <p class="centrado">
+                
+                París 532 Haedo (1706) <br />
+                Buenos Aires, Argentina <br /> <br />
+
+                info@frh.utn.edu.ar <br />
+
+            </p>
+        </div>        
     </footer>
 
 
@@ -153,6 +160,7 @@
         	  		<span aria-hidden="true">&times;</span>
         		</button>
       		</div>
+
       		<div class="modal-body">
         		<form id="formLogin">
         			<div class="form-group">
@@ -215,8 +223,9 @@
                 if(data === 'exito') {
                     window.location.href="login.php";
                 } else {
-                    $('#loginMensaje').html(data);
-                    $('#loginForm').find('input').val('')
+                    // $('#loginMensaje').html(data);
+                    alert(data); 
+                    $('#formLogin').find('input').val('');
                 }     
             }});
     });

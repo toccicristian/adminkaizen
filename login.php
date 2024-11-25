@@ -101,14 +101,15 @@ if(mysqli_num_rows($consulta)!=0){
 
 
 		?>
-		<div id="usuarios" class="tab-content">
+		<div id="usuarios" class="tab-content area-usuarios">
 		<?php
 
 			if((int)$_SESSION['idrol']<(int)$idrol_max['max_idrol']){
 				?>
 						<div class="gestion-usuarios">
 							<h3 class='centrado'>GESTIÓN DE USUARIOS</h3>
-							<button type="button" class="btn btn-outline-primary mx-4" data-toggle="modal" data-target="#altaModal">	
+							<!-- <button type="button" class="btn btn-outline-primary mx-4" data-toggle="modal" data-target="#altaModal">	 -->
+							<button type="button" class="btn btn-primary mx-4" data-toggle="modal" data-target="#altaModal">	
 									Alta de Empleado
 							</button>
 
