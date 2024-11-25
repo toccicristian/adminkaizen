@@ -78,32 +78,41 @@ if(mysqli_num_rows($consulta)!=0){
 			
 
 				<div class="alert alert-info" role="alert">
-					Bienvenid@, <strong><?php echo $_SESSION['nombre']; ?></strong>! Sus Permisos son de: <strong><?php echo $_SESSION['rol']; ?></strong>.
-				
-				<?php
-					$cuentaMensajesNuevos=mysqli_query($conexion,"SELECT COUNT(M.idMensaje) AS cantidad 
-									FROM `MENSAJES` M 
-									WHERE M.idReceptor='$idUsuario' AND LEIDO=0");
-					$resultadoMensajesNuevos=mysqli_fetch_array($cuentaMensajesNuevos);
-					$plural='';
-					if ($resultadoMensajesNuevos['cantidad']!=1){
-						$plural='s';
-					}
-				?>
-					<h6>
-					Tiene <?php echo $resultadoMensajesNuevos['cantidad']; ?> 
-					<a href="./mensajes.php" target="_blank">Mensaje<?php echo $plural;?> </a> nuevo<?php echo $plural;?>. 
-					<?php if($resultadoMensajesNuevos['cantidad']>0){
-						?><a href="./mensajes.php" target="_blank"><img src="imagenes/email-static.png" alt="imagen de sobre" class="animacion-mail"></a><?php
-					}?>
-					</h6>
+					<div class="notificaciones">
+						Bienvenid@, <strong><?php echo $_SESSION['nombre']; ?></strong>! Sus Permisos son de: <strong><?php echo $_SESSION['rol']; ?></strong>.
+					
+						<?php
+							$cuentaMensajesNuevos=mysqli_query($conexion,"SELECT COUNT(M.idMensaje) AS cantidad 
+											FROM `MENSAJES` M 
+											WHERE M.idReceptor='$idUsuario' AND LEIDO=0");
+							$resultadoMensajesNuevos=mysqli_fetch_array($cuentaMensajesNuevos);
+							$plural='';
+							if ($resultadoMensajesNuevos['cantidad']!=1){
+								$plural='s';
+							}
+						?>
 
-					<?php
-					if(isset($_SESSION['mensajesistema'])){
-						echo "<p class='mensaje-sistema'>".$_SESSION['mensajesistema']."</p>";
-						unset($_SESSION['mensajesistema']);
-					}
-					?>
+						<h6>
+							Tiene <?php echo $resultadoMensajesNuevos['cantidad']; ?> 
+							<a href="./mensajes.php" target="_blank">Mensaje<?php echo $plural;?> </a> nuevo<?php echo $plural;?>. 
+							<?php if($resultadoMensajesNuevos['cantidad']>0){
+								?><a href="./mensajes.php" target="_blank"><img src="imagenes/email-static.png" alt="imagen de sobre" class="animacion-mail"></a><?php
+							}?>
+						</h6>
+
+						<?php
+						if(isset($_SESSION['mensajesistema'])){
+							echo "<p class='mensaje-sistema'>".$_SESSION['mensajesistema']."</p>";
+							unset($_SESSION['mensajesistema']);
+						}else{
+							?><p class="mensaje-sistema">&nbsp</p><?php
+						}
+						?>
+
+					</div>
+					<p>
+						<a href="logout.php" class="btn btn-info" role="button">CERRAR SESIÓN</a>
+					</p>
 
 				</div>			
 		</header>
@@ -227,9 +236,6 @@ if(mysqli_num_rows($consulta)!=0){
 			</section>
 
 		</div>
-	<p class="centrado">
-		<a href="logout.php" class="btn btn-info" role="button">CERRAR SESIÓN</a>
-	</p>
 			
 
 			<!-- MODAL PARA ALTA DE USUARIOS -->

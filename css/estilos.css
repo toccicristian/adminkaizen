@@ -80,15 +80,17 @@ ul li{
 
 
 .alert {
-    font-size: 1.1em; /* Aumenta el tamaño de la fuente */
-    border-radius: 5px; /* Bordes redondeados */
+    font-size: 1.1em; 
+    border-radius: 5px; 
+    display:flex;
+    justify-content:space-between;
+    padding-top:2rem;
 }
 
 
 .seccion-inicio{
     min-height:1000px;
     margin: 0;
-    /* padding: 2rem 2rem; */
     padding: 2rem 0;
     background-image: linear-gradient(to top,white 0%, var(--color-estandar) 95%);
     width:100%;
