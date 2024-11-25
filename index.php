@@ -26,10 +26,10 @@
 		<h1>Admin Kaizen</h1>
 		<nav class="navbar">
 			<div class="menu">
-                <button type="button" class="btn btn-outline-primary mx-4" data-toggle="modal" data-target="#registerModal">
+                <button type="button" class="btn btn-outline-primary mx-4 boton-responsive" data-toggle="modal" data-target="#registerModal">
                             Registrarse
                 </button>
-                <button type="button" class="btn btn-outline-primary mx-4" data-toggle="modal" data-target="#loginModal">
+                <button type="button" class="btn btn-outline-primary mx-4 boton-responsive" data-toggle="modal" data-target="#loginModal">
                             Iniciar Sesión
                 </button>
 				<!-- <a href="./form_login.php" class="menu-item">Iniciar sesión</a> -->
@@ -66,10 +66,8 @@
                 <p class="producto-descripcion">
                     <h3>Plataforma de gestión de actividades</h3>
                     <p>
-                        <span class="iso-font">Admin Kaizen</span> es una plataforma de administración de actividades diseñada 
-                        para optimizar la coordinación y gestión jerárquica de proyectos. 
-                        Ofrece una interfaz intuitiva y fácil de usar, que permite a los usuarios gestionar tareas, 
-                        programar eventos, asignar recursos y supervisar el progreso de los proyectos en tiempo real. 
+                        Con <span class="iso-font">Admin Kaizen</span> optimice la coordinación y gestión jerárquica 
+                        de sus proyectos de una forma fácil e intuitiva.
                     </p>
                 </p>
             </div>

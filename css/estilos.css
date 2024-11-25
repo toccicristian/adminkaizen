@@ -1,3 +1,9 @@
+:root{
+    --color-estandar:#abe6ff;
+}
+
+
+
 h1{
     display:none;
 }
@@ -18,6 +24,7 @@ ul li{
 
 
 .navbar{
+    padding:0;
     display:flex;
     justify-content: space-between;
     flex-wrap: wrap;
@@ -44,7 +51,7 @@ ul li{
     display: flex;
     align-items: center; 
     justify-content: flex-end; 
-    margin-bottom: 20px; 
+    /* margin-bottom: 20px;  */
 }
 
 .isotipo-index {
@@ -65,13 +72,14 @@ ul li{
 
 
 .seccion-inicio{
+    min-height:1000px;
     display:flex;
     align-items: flex-start;
     flex-wrap:wrap;
     justify-content:space-between;
     margin: 0;
     padding: 2rem 2rem;
-    background-image: linear-gradient(to right,white 0%, grey 95%);
+    background-image: linear-gradient(to top,white 0%, var(--color-estandar) 95%);
 }
 
 .isotipo-index{
@@ -223,11 +231,13 @@ article.usuarios{
 
 
 footer{
-    position:absolute;
+    /* position:absolute;
+    bottom:0; */
+    position:relative;
     bottom:0;
     width:100%;
-    height:10rem;
-    background-color:rgb(207, 207, 207);
+    height:250px;
+    background-image: linear-gradient(to bottom,white 0%, var(--color-estandar) 95%);
 
 }
 
@@ -250,4 +260,75 @@ footer{
 .seleccionado{
     font-weight:bold;
     text-decoration-line: underline;
+}
+
+
+@media(max-width: 859px){
+    .seccion-inicio{
+        flex-direction: column;
+        flex-flow: column-reverse;
+        align-items: flex-start;
+    }
+
+    section aside{
+        width: 90%;
+        margin: 2rem auto 0 auto;
+    }
+    
+    section .producto-detalles{
+        width:90%;
+     }
+
+     .navbar{
+        flex-flow:column-reverse;
+        justify-content: space-around;
+        min-height:200px;
+    }
+
+
+    .seccion-inicio{
+        min-height:600px;
+        align-items:flex-start;
+        justify-content: flex-end;
+    }
+
+
+
+
+
+
+}
+
+@media(max-width: 500px){
+    .isologo-small {
+        flex-flow:column-reverse;
+    }
+
+
+    .menu{
+        width:100%;
+        margin:2rem 0;
+        flex-flow:column;
+        align-items:center;    
+    }
+
+    .boton-responsive{
+        width:80%;
+        height:3rem;
+        margin:0.3rem 0;
+    }
+    
+    /* .menu .menu-item{
+        margin: 0 2rem;
+        color: black;
+        text-decoration:none;
+    }
+    
+    .navbar .menu{
+        align-items:center;
+        flex-wrap: wrap;
+    } */
+
+
+
 }

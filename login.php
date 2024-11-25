@@ -54,34 +54,38 @@ if(mysqli_num_rows($consulta)!=0){
 
 		?>
 		<header>
+		<h1>Admin Kaizen</h1>
+		<nav class="navbar">
+			<ul class="nav nav-tabs">
+					<li class="nav-item">
+						<a class="nav-link active" href="#" onclick="showSection('usuarios')">Usuarios</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#" onclick="showSection('tareas')">Tareas</a>
+					</li>
+				</ul>
+
+
 			<div class="isologo-small text-right">
 				<p class="isotipo-index">Admin Kaizen</p>
 				<a href="./index.php">
 					<img class="main-logo-small" src="./imagenes/logo-200px.png" alt="adminkaizen logo">
 				</a>
     		</div>
+		</nav>
+			
 
-			<h1>Admin Kaizen</h1>
-			<ul class="nav nav-tabs">
-				<li class="nav-item">
-					<a class="nav-link active" href="#" onclick="showSection('usuarios')">Usuarios</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#" onclick="showSection('tareas')">Tareas</a>
-				</li>
-			</ul>
-
-			<div class="alert alert-info mt-3" role="alert">
-        		Bienvenid@, <strong><?php echo $_SESSION['nombre']; ?></strong>! Sus Permisos son de: <strong><?php echo $_SESSION['rol']; ?></strong>.
-		    
-			<?php
-				$cuentaMensajesNuevos=mysqli_query($conexion,"SELECT COUNT(M.idMensaje) AS cantidad 
-								FROM `MENSAJES` M 
-								WHERE M.idReceptor='$idUsuario' AND LEIDO=0");
-				$resultadoMensajesNuevos=mysqli_fetch_array($cuentaMensajesNuevos);
-			?>
-				<h6>Tiene <?php echo $resultadoMensajesNuevos['cantidad']; ?> <a href="./mensajes.php" target="_blank">Mensajes</a> nuevos. </h6>
-			</div>			
+				<div class="alert alert-info" role="alert">
+					Bienvenid@, <strong><?php echo $_SESSION['nombre']; ?></strong>! Sus Permisos son de: <strong><?php echo $_SESSION['rol']; ?></strong>.
+				
+				<?php
+					$cuentaMensajesNuevos=mysqli_query($conexion,"SELECT COUNT(M.idMensaje) AS cantidad 
+									FROM `MENSAJES` M 
+									WHERE M.idReceptor='$idUsuario' AND LEIDO=0");
+					$resultadoMensajesNuevos=mysqli_fetch_array($cuentaMensajesNuevos);
+				?>
+					<h6>Tiene <?php echo $resultadoMensajesNuevos['cantidad']; ?> <a href="./mensajes.php" target="_blank">Mensajes</a> nuevos. </h6>
+				</div>			
 		</header>
 		<?php
 
@@ -105,7 +109,7 @@ if(mysqli_num_rows($consulta)!=0){
 				?>
 						<h3 class='centrado'>GESTIÓN DE USUARIOS</h3>
 						<button type="button" class="btn btn-outline-primary mx-4" data-toggle="modal" data-target="#altaModal">	
-                    	        Alta
+                    	        Alta de Empleado
                 		</button>
 
 
