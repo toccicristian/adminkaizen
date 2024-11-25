@@ -14,6 +14,8 @@
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script type="text/javascript" src="./js/busqueda.js"></script>
 
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.12.0/css/all.css">
+
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <link rel="stylesheet" href="css/estilos.css">
 
@@ -83,8 +85,18 @@ if(mysqli_num_rows($consulta)!=0){
 									FROM `MENSAJES` M 
 									WHERE M.idReceptor='$idUsuario' AND LEIDO=0");
 					$resultadoMensajesNuevos=mysqli_fetch_array($cuentaMensajesNuevos);
+					$plural='';
+					if ($resultadoMensajesNuevos['cantidad']!=1){
+						$plural='s';
+					}
 				?>
-					<h6>Tiene <?php echo $resultadoMensajesNuevos['cantidad']; ?> <a href="./mensajes.php" target="_blank">Mensajes</a> nuevos. </h6>
+					<h6>
+					Tiene <?php echo $resultadoMensajesNuevos['cantidad']; ?> 
+					<a href="./mensajes.php" target="_blank">Mensaje<?php echo $plural;?> </a> nuevo<?php echo $plural;?>. 
+					<?php if($resultadoMensajesNuevos['cantidad']>0){
+						?><a href="./mensajes.php" target="_blank"><img src="imagenes/email-static.png" alt="imagen de sobre" class="animacion-mail"></a><?php
+					}?>
+					</h6>
 				</div>			
 		</header>
 		<?php
@@ -199,7 +211,7 @@ if(mysqli_num_rows($consulta)!=0){
 
 		</div>
 	<p class="centrado">
-		<a href="logout.php">CERRAR SESIÓN</a>
+		<a href="logout.php" class="btn btn-info" role="button">CERRAR SESIÓN</a>
 	</p>
 			
 
@@ -309,10 +321,8 @@ if(mysqli_num_rows($consulta)!=0){
 		<?php
 
 }else{
-	?>
-	<p class="error-centrado"><?php echo "No es un usuario registrado"; ?></p>
-	<?php
-		include ("form_login.php");
+		header("Location:./logout.php");
+		// include ("form_login.php");
 }
 
 ?>
