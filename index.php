@@ -8,6 +8,10 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- <link href="https://fonts.googleapis.com/css2?family=Kumar+One&display=swap" rel="stylesheet"> -->
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Kumar+One&family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+
+
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <link rel="stylesheet" href="css/estilos.css">
@@ -22,10 +26,10 @@
 		<h1>Admin Kaizen</h1>
 		<nav class="navbar">
 			<div class="menu">
-                <button type="button" class="btn btn-outline-primary mx-4" data-toggle="modal" data-target="#registerModal">
+                <button type="button" class="btn btn-outline-primary mx-4 boton-responsive" data-toggle="modal" data-target="#registerModal">
                             Registrarse
                 </button>
-                <button type="button" class="btn btn-outline-primary mx-4" data-toggle="modal" data-target="#loginModal">
+                <button type="button" class="btn btn-outline-primary mx-4 boton-responsive" data-toggle="modal" data-target="#loginModal">
                             Iniciar Sesión
                 </button>
 				<!-- <a href="./form_login.php" class="menu-item">Iniciar sesión</a> -->
@@ -58,22 +62,40 @@
         ?>        
         </section>
         <section class="seccion-inicio">
-            <div class="producto-detalles">
-                <p class="producto-descripcion">
-                    <h3>Plataforma de gestión de actividades</h3>
-                    <p>
-                        Admin Kaizen es una plataforma de administración de actividades diseñada 
-                        para optimizar la coordinación y gestión jerarquica de proyectos. 
-                        Ofrece una interfaz intuitiva y fácil de usar, que permite a los usuarios gestionar tareas, 
-                        programar eventos, asignar recursos y supervisar el progreso de los proyectos en tiempo real. 
+            <div class="transparencia">
+                <div class="producto-detalles">
+                    <p class="producto-descripcion">
+                        <h3>Plataforma de gestión de actividades</h3>
+                        <p>
+                            Con <span class="iso-font">Admin Kaizen</span> optimice la coordinación y gestión jerárquica 
+                            de sus proyectos de una forma fácil e intuitiva.
+                        </p>
                     </p>
-                </p>
-            </div>
-            <aside>
-                <img src="./imagenes/preview.png" alt="screenshot del producto" class="producto-screenshot">
-            </aside> 
+                </div>
+                <aside>
+                    <img src="./imagenes/preview.png" alt="screenshot del producto" class="producto-screenshot">
+                </aside>
+            </div> 
         </section>
     </article>
+
+
+    <footer>
+        <div class="copyright centrado">
+            <p> © Realizado por Tocci, Cristian <br /> Todos los derechos reservados. </p>
+        </div>
+        <div class="contacto">
+            <p class="centrado">
+                
+                París 532 Haedo (1706) <br />
+                Buenos Aires, Argentina <br /> <br />
+
+                info@frh.utn.edu.ar <br />
+
+            </p>
+        </div>        
+    </footer>
+
 
 
     <?php include('conexion.php'); ?>
@@ -138,6 +160,7 @@
         	  		<span aria-hidden="true">&times;</span>
         		</button>
       		</div>
+
       		<div class="modal-body">
         		<form id="formLogin">
         			<div class="form-group">
@@ -200,8 +223,9 @@
                 if(data === 'exito') {
                     window.location.href="login.php";
                 } else {
-                    $('#loginMensaje').html(data);
-                    $('#loginForm').find('input').val('')
+                    // $('#loginMensaje').html(data);
+                    alert(data); 
+                    $('#formLogin').find('input').val('');
                 }     
             }});
     });

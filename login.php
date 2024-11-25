@@ -8,9 +8,13 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Kumar+One&family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+
 
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script type="text/javascript" src="./js/busqueda.js"></script>
+
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.12.0/css/all.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <link rel="stylesheet" href="css/estilos.css">
@@ -52,59 +56,96 @@ if(mysqli_num_rows($consulta)!=0){
 
 		?>
 		<header>
+		<h1>Admin Kaizen</h1>
+		<nav class="navbar">
+			<ul class="nav nav-tabs">
+					<li class="nav-item">
+						<a class="nav-link active" href="#" onclick="showSection('usuarios')">Usuarios</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#" onclick="showSection('tareas')">Tareas</a>
+					</li>
+				</ul>
+
+
 			<div class="isologo-small text-right">
 				<p class="isotipo-index">Admin Kaizen</p>
 				<a href="./index.php">
 					<img class="main-logo-small" src="./imagenes/logo-200px.png" alt="adminkaizen logo">
 				</a>
     		</div>
+		</nav>
+			
 
-			<h1>Admin Kaizen</h1>
-			<ul class="nav nav-tabs">
-				<li class="nav-item">
-					<a class="nav-link active" href="#" onclick="showSection('usuarios')">Usuarios</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#" onclick="showSection('tareas')">Tareas</a>
-				</li>
-			</ul>
+				<div class="alert alert-info" role="alert">
+					<div class="notificaciones">
+						Bienvenid@, <strong><?php echo $_SESSION['nombre']; ?></strong>! Sus Permisos son de: <strong><?php echo $_SESSION['rol']; ?></strong>.
+					
+						<?php
+							$cuentaMensajesNuevos=mysqli_query($conexion,"SELECT COUNT(M.idMensaje) AS cantidad 
+											FROM `MENSAJES` M 
+											WHERE M.idReceptor='$idUsuario' AND LEIDO=0");
+							$resultadoMensajesNuevos=mysqli_fetch_array($cuentaMensajesNuevos);
+							$plural='';
+							if ($resultadoMensajesNuevos['cantidad']!=1){
+								$plural='s';
+							}
+						?>
 
-			<div class="alert alert-info mt-3" role="alert">
-        		Bienvenid@, <strong><?php echo $_SESSION['nombre']; ?></strong>! Sus Permisos son de: <strong><?php echo $_SESSION['rol']; ?></strong>.
-		    
-			<?php
-				$cuentaMensajesNuevos=mysqli_query($conexion,"SELECT COUNT(M.idMensaje) AS cantidad 
-								FROM `MENSAJES` M 
-								WHERE M.idReceptor='$idUsuario' AND LEIDO=0");
-				$resultadoMensajesNuevos=mysqli_fetch_array($cuentaMensajesNuevos);
-			?>
-				<h6>Tiene <?php echo $resultadoMensajesNuevos['cantidad']; ?> <a href="./mensajes.php" target="_blank">Mensajes</a> nuevos. </h6>
-			</div>			
+						<h6>
+							Tiene <?php echo $resultadoMensajesNuevos['cantidad']; ?> 
+							<a href="./mensajes.php" target="_blank">Mensaje<?php echo $plural;?> </a> nuevo<?php echo $plural;?>. 
+							<?php if($resultadoMensajesNuevos['cantidad']>0){
+								?><a href="./mensajes.php" target="_blank"><img src="imagenes/email-static.png" alt="imagen de sobre" class="animacion-mail"></a><?php
+							}?>
+						</h6>
+
+						<?php
+						if(isset($_SESSION['mensajesistema'])){
+							echo "<p class='mensaje-sistema'>".$_SESSION['mensajesistema']."</p>";
+							unset($_SESSION['mensajesistema']);
+						}else{
+							?><p class="mensaje-sistema">&nbsp</p><?php
+						}
+						?>
+
+					</div>
+					<p>
+						<a href="logout.php" class="btn btn-info" role="button">CERRAR SESIÓN</a>
+					</p>
+
+				</div>			
 		</header>
+
 		<?php
-
-
-
-		if(isset($_SESSION['mensajesistema'])){
-			echo "<p class='mensaje-sistema'>".$_SESSION['mensajesistema']."</p>";
-			unset($_SESSION['mensajesistema']);
-		}
-
 		$consulta_idrol_max=mysqli_query($conexion, "SELECT MAX(IdRol) AS 'max_idrol' FROM ROL");
 		$idrol_max=mysqli_fetch_array($consulta_idrol_max);
-
-
 		?>
-		<div id="usuarios" class="tab-content">
+		<div id="usuarios" class="tab-content area-usuarios">
 		<?php
 
 			if((int)$_SESSION['idrol']<(int)$idrol_max['max_idrol']){
-				// echo "<h3 class='centrado'>GESTIÓN DE USUARIOS:</h3><br />";
 				?>
-						<h3 class='centrado'>GESTIÓN DE USUARIOS</h3>
-						<button type="button" class="btn btn-outline-primary mx-4" data-toggle="modal" data-target="#altaModal">	
-                    	        Alta
-                		</button>
+						<div class="gestion-usuarios">
+							<h3 class='centrado'>GESTIÓN DE USUARIOS</h3>
+							<!-- <button type="button" class="btn btn-outline-primary mx-4" data-toggle="modal" data-target="#altaModal">	 -->
+							<button type="button" class="btn btn-primary mx-4" data-toggle="modal" data-target="#altaModal">	
+									Alta de Empleado
+							</button>
+
+							<section class="busqueda-usuarios">				
+								<article class="usuarios">
+									<p class="campo-busqueda">
+										<input type="text" id="busquedaUsuarios" class="search-input" placeholder="Nombre de usuario a buscar" />
+										<label for="mostrareliminados"><input type="checkbox" id="mostrareliminados" name="mostrareliminados">Mostrar eliminados</label>
+									</p>
+									<div class="resultadoUsuarios" id="resultadoUsuarios"></div>
+								</article>
+							</section>
+
+
+
+						</div>
 
 
 				<?php
@@ -112,40 +153,36 @@ if(mysqli_num_rows($consulta)!=0){
 
 			?>
 
-			<section class="busqueda-usuarios">
-				<!-- <h4 class="centrado">Búsqueda de Usuarios</h4> -->
-				<article class="usuarios">
-					<p class="campo-busqueda">
-						<input type="text" id="busquedaUsuarios" placeholder="Nombre de usuario a buscar" />
-						<label for="mostrareliminados"><input type="checkbox" id="mostrareliminados" name="mostrareliminados">Mostrar eliminados</label>
-					</p>
-					<div class="resultadoUsuarios" id="resultadoUsuarios"></div>
-				</article>
 
-			</section>
 		</div>
 
-		<div id="tareas" class="tab-content" style="display: none;">		
+		<div id="tareas" class="tab-content area-tareas" style="display: none;">		
 			<section class="formulario-edicion">
 				<h3 class="centrado">GESTION DE TAREAS</h3>
 				<article class="tareas">
 					<ul>
-						<li><h4>Tareas asignadas</h4> 
-							<ul>
-								<li>
-									<form action="tareasAsignadas.php" method="post" target="_blank">
-										<input class="inline-form-button" type="submit" value="Consultar..."/>
+						<li>
+							<!-- <h4>Tareas asignadas</h4> 
+							<ul class="transparencia tareas-asignadas">
+								<li> -->
+									<form action="tareasAsignadas.php" method="post" target="_blank" class="boton-con-check transparencia tareas-asignadas">
+
+										<input class="btn btn-primary mx4" type="submit" value="Consultar Tareas asignadas..."/>
+										<!-- <input class="inline-form-button" type="submit" value="Consultar Tareas asignadas..."/> -->
 										<label for="solosincompletar"><input type="checkbox" name="solosincompletar">Sólo sin Completar</label>
 									</form>
-								</li>
+								<!-- </li> -->
+
 								<!-- SOLO MOSTRAR EL SIGUIENTE ITEM SI LAS TAREAS ASIGNADAS >0 -->
-								<li>
+								<!-- <li>
 									<form action="diagrama.php" method="post">
 										<input class="inline-form-button" type="submit" value="Diagrama..."/>
 										<label for="solosincompletar"><input type="checkbox" name="solosincompletar">Sólo sin Completar</label>
 									</form>
-								</li>
-							</ul>
+								</li> -->
+						
+							<!-- </ul> -->
+						</li>
 
 				<!-- SOLO MOSTRAR SI  $_SESSION['idrol']<5-->
 	<?php
@@ -153,31 +190,43 @@ if(mysqli_num_rows($consulta)!=0){
 	?>	
 
 						<li><h4>Nueva Tarea</h4>
-							<form action="creartarea.php" method="post" >
+							<form action="creartarea.php" method="post" class="transparencia tareas-asignadas">
 								<ul>
 									<li>
-										<label for="taskstart">Nombre:<input type="text" maxlength=50 placeholder="Nombre de tarea" name="taskname" required /></label>
+										<input type="text" name='taskname' class="form-control" placeholder="Nombre de la tarea" aria-label="Tarea" aria-describedby="basic-addon1" required>
+										<!-- <label for="taskstart">Nombre:<input type="text" maxlength=50 placeholder="Nombre de tarea" name="taskname" required /></label> -->
 									</li>
 									<li>
-										<label for="taskstart">Inicio :<input type="date" name="taskstart" required /></label>
+										<label for="taskstart" class="label-fecha">Inicio </label>
+										<input type="date" name="taskstart" required />
 									</li>
 									<li>
-										<label for="taskstart">Mejor Fin :<input type="date" name="taskbestend" required /></label>
+										<label for="taskstart" class="label-fecha">Mejor Fin </label>
+										<input type="date" name="taskbestend" required />
 									</li>
 									<li>
-										<label for="taskstart">Peor Fin :<input type="date" name="taskworstend" required /></label>
+										<label for="taskstart" class="label-fecha">Peor Fin </label>
+										<input type="date" name="taskworstend" required />
 									</li>
 									<p><textarea maxlength=255 rows="5" cols="40" placeholder="Notas adicionales..." name="tasknotes" ></textarea></p>
-									<input class="inline-form-button" type="submit" value="Crear tarea"/>
+									<!-- <input class="inline-form-button" type="submit" value="Crear tarea"/> -->
+									<input class="btn btn-primary mx4" type="submit" value="Crear tarea"/>
+									
 								</ul>
 							</form>
 						</li>
 					</ul>
 					<aside class="busqueda-tareas">
 						<h4>Búsqueda de Tareas</h4>
-						<input type="text" id="busquedaTareas" placeholder="Nombre de la tarea" />
-						<label for="mostrareliminadas"><input type="checkbox" id="mostrareliminadas" name="mostrareliminadas">Mostrar eliminadas</label>
-						<div id="resultadoTareas"></div>
+						<div class="transparencia tareas-asignadas">
+							<div class="boton-con-check">
+								<input type="text" id="busquedaTareas" placeholder="Nombre de la tarea" />
+								<label for="mostrareliminadas"><input type="checkbox" id="mostrareliminadas" name="mostrareliminadas">Mostrar eliminadas</label>
+							</div>
+
+							<div id="resultadoTareas"></div>
+						</div>
+
 					</aside>
 
 				<?php
@@ -187,9 +236,6 @@ if(mysqli_num_rows($consulta)!=0){
 			</section>
 
 		</div>
-	<p class="centrado">
-		<a href="logout.php">CERRAR SESIÓN</a>
-	</p>
 			
 
 			<!-- MODAL PARA ALTA DE USUARIOS -->
@@ -298,10 +344,8 @@ if(mysqli_num_rows($consulta)!=0){
 		<?php
 
 }else{
-	?>
-	<p class="error-centrado"><?php echo "No es un usuario registrado"; ?></p>
-	<?php
-		include ("form_login.php");
+		header("Location:./logout.php");
+		// include ("form_login.php");
 }
 
 ?>

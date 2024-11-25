@@ -40,14 +40,27 @@ $(document).ready(function(e){
 
     <section>
     <article class="tabla-resultados tabla-no-centrada">
-        <table class="tabla-resultados">
+        <!-- <table class="tabla-resultados">
             <tr>
                 <th class="campo-resultados">Nombre</th>
                 <th class="campo-resultados">Credenciales</th>
                 <th class="campo-resultados"></th>
                 <th class="campo-resultados"></th>
                 <th class="campo-resultados"></th>
-            </tr>
+            </tr> -->
+            <table class="table table-striped">
+                <thead class="thead-light">
+                    <tr>
+                        <th class="campo-resultados">Nombre</th>
+                        <th class="campo-resultados">Credenciales</th>
+                        <th class="campo-resultados"></th>
+                        <th class="campo-resultados"></th>
+                        <th class="campo-resultados"></th>
+                    </tr>
+                </thead>
+                <tbody>    
+
+
     <?php
 
     if ($result->num_rows > 0) {
@@ -78,7 +91,10 @@ $(document).ready(function(e){
                 </td>
             </tr>
             <?php
-        }
+        }?>
+            </tbody>
+            </table>
+    <?php
     } else {
         echo "No se encontraron usuarios.";
     }
