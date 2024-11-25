@@ -97,21 +97,20 @@ if(mysqli_num_rows($consulta)!=0){
 						?><a href="./mensajes.php" target="_blank"><img src="imagenes/email-static.png" alt="imagen de sobre" class="animacion-mail"></a><?php
 					}?>
 					</h6>
+
+					<?php
+					if(isset($_SESSION['mensajesistema'])){
+						echo "<p class='mensaje-sistema'>".$_SESSION['mensajesistema']."</p>";
+						unset($_SESSION['mensajesistema']);
+					}
+					?>
+
 				</div>			
 		</header>
+
 		<?php
-
-
-
-		if(isset($_SESSION['mensajesistema'])){
-			echo "<p class='mensaje-sistema'>".$_SESSION['mensajesistema']."</p>";
-			unset($_SESSION['mensajesistema']);
-		}
-
 		$consulta_idrol_max=mysqli_query($conexion, "SELECT MAX(IdRol) AS 'max_idrol' FROM ROL");
 		$idrol_max=mysqli_fetch_array($consulta_idrol_max);
-
-
 		?>
 		<div id="usuarios" class="tab-content area-usuarios">
 		<?php
@@ -148,27 +147,33 @@ if(mysqli_num_rows($consulta)!=0){
 
 		</div>
 
-		<div id="tareas" class="tab-content" style="display: none;">		
+		<div id="tareas" class="tab-content area-tareas" style="display: none;">		
 			<section class="formulario-edicion">
 				<h3 class="centrado">GESTION DE TAREAS</h3>
 				<article class="tareas">
 					<ul>
-						<li><h4>Tareas asignadas</h4> 
-							<ul>
-								<li>
-									<form action="tareasAsignadas.php" method="post" target="_blank">
-										<input class="inline-form-button" type="submit" value="Consultar..."/>
+						<li>
+							<!-- <h4>Tareas asignadas</h4> 
+							<ul class="transparencia tareas-asignadas">
+								<li> -->
+									<form action="tareasAsignadas.php" method="post" target="_blank" class="boton-con-check transparencia tareas-asignadas">
+
+										<input class="btn btn-primary mx4" type="submit" value="Consultar Tareas asignadas..."/>
+										<!-- <input class="inline-form-button" type="submit" value="Consultar Tareas asignadas..."/> -->
 										<label for="solosincompletar"><input type="checkbox" name="solosincompletar">Sólo sin Completar</label>
 									</form>
-								</li>
+								<!-- </li> -->
+
 								<!-- SOLO MOSTRAR EL SIGUIENTE ITEM SI LAS TAREAS ASIGNADAS >0 -->
-								<li>
+								<!-- <li>
 									<form action="diagrama.php" method="post">
 										<input class="inline-form-button" type="submit" value="Diagrama..."/>
 										<label for="solosincompletar"><input type="checkbox" name="solosincompletar">Sólo sin Completar</label>
 									</form>
-								</li>
-							</ul>
+								</li> -->
+						
+							<!-- </ul> -->
+						</li>
 
 				<!-- SOLO MOSTRAR SI  $_SESSION['idrol']<5-->
 	<?php
@@ -176,31 +181,43 @@ if(mysqli_num_rows($consulta)!=0){
 	?>	
 
 						<li><h4>Nueva Tarea</h4>
-							<form action="creartarea.php" method="post" >
+							<form action="creartarea.php" method="post" class="transparencia tareas-asignadas">
 								<ul>
 									<li>
-										<label for="taskstart">Nombre:<input type="text" maxlength=50 placeholder="Nombre de tarea" name="taskname" required /></label>
+										<input type="text" name='taskname' class="form-control" placeholder="Nombre de la tarea" aria-label="Tarea" aria-describedby="basic-addon1" required>
+										<!-- <label for="taskstart">Nombre:<input type="text" maxlength=50 placeholder="Nombre de tarea" name="taskname" required /></label> -->
 									</li>
 									<li>
-										<label for="taskstart">Inicio :<input type="date" name="taskstart" required /></label>
+										<label for="taskstart" class="label-fecha">Inicio </label>
+										<input type="date" name="taskstart" required />
 									</li>
 									<li>
-										<label for="taskstart">Mejor Fin :<input type="date" name="taskbestend" required /></label>
+										<label for="taskstart" class="label-fecha">Mejor Fin </label>
+										<input type="date" name="taskbestend" required />
 									</li>
 									<li>
-										<label for="taskstart">Peor Fin :<input type="date" name="taskworstend" required /></label>
+										<label for="taskstart" class="label-fecha">Peor Fin </label>
+										<input type="date" name="taskworstend" required />
 									</li>
 									<p><textarea maxlength=255 rows="5" cols="40" placeholder="Notas adicionales..." name="tasknotes" ></textarea></p>
-									<input class="inline-form-button" type="submit" value="Crear tarea"/>
+									<!-- <input class="inline-form-button" type="submit" value="Crear tarea"/> -->
+									<input class="btn btn-primary mx4" type="submit" value="Crear tarea"/>
+									
 								</ul>
 							</form>
 						</li>
 					</ul>
 					<aside class="busqueda-tareas">
 						<h4>Búsqueda de Tareas</h4>
-						<input type="text" id="busquedaTareas" placeholder="Nombre de la tarea" />
-						<label for="mostrareliminadas"><input type="checkbox" id="mostrareliminadas" name="mostrareliminadas">Mostrar eliminadas</label>
-						<div id="resultadoTareas"></div>
+						<div class="transparencia tareas-asignadas">
+							<div class="boton-con-check">
+								<input type="text" id="busquedaTareas" placeholder="Nombre de la tarea" />
+								<label for="mostrareliminadas"><input type="checkbox" id="mostrareliminadas" name="mostrareliminadas">Mostrar eliminadas</label>
+							</div>
+
+							<div id="resultadoTareas"></div>
+						</div>
+
 					</aside>
 
 				<?php

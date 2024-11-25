@@ -18,11 +18,11 @@
 
         $idrol=$_SESSION['idrol'];
         $username=$_SESSION['nombre'];
-        
+      
 ?>
 <section>
     <article class="tabla-resultados tabla-no-centrada">
-        <table class="tabla-resultados">
+        <!-- <table class="tabla-resultados">
             <tr>
                 <th class="campo-resultados">Nombre</th>
                 <th class="campo-resultados">Inicio</th>
@@ -30,7 +30,25 @@
                 <th class="campo-resultados">Peor Fin</th>
                 <th class="campo-resultados"></th>
                 <th class="campo-resultados"></th>
-            </tr>
+            </tr> -->
+
+            <table class="table table-stripped">
+                <thead class="thead-light">
+                    <tr>
+                    <th class="campo-resultados">Nombre</th>
+                    <th class="campo-resultados">Inicio</th>
+                    <th class="campo-resultados">Mejor Fin</th>
+                    <th class="campo-resultados">Peor Fin</th>
+                    <th class="campo-resultados"></th>
+                    <th class="campo-resultados"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                </tbody>
+
+            
+            
 <?php
     while ($resultado = MySQLi_fetch_array($consulta)) {
         if(($resultado['eliminada']==0) || ($_POST['mostrareliminadas']!='false')){

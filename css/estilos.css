@@ -20,6 +20,7 @@ h2{
 
 ul{
     list-style-type: none;
+    padding:0;
 }
 
 ul li{
@@ -152,6 +153,14 @@ ul li{
 }
 
 
+.boton-con-check{
+    margin:2rem 0;
+    display:flex;
+    flex-direction:column;
+    row-gap:2rem;
+    width:100%;
+}
+
 .alert{
     margin-bottom:0;
 }
@@ -159,6 +168,22 @@ ul li{
 .area-usuarios{
     padding-top:2rem;
     background-image: linear-gradient(to top,white 0%, var(--color-estandar) 95%);
+}
+
+.area-tareas{
+    padding-top:2rem;
+    background-image: linear-gradient(to top,white 0%, var(--color-estandar) 95%);
+}
+
+.tareas-asignadas{
+    flex-direction:column;
+    padding-left:2rem;
+    padding-right:2rem;
+    border-radius:4%;
+}
+
+.label-fecha{
+    width:6rem;
 }
 
 .gestion-usuarios{
@@ -189,13 +214,17 @@ article.tabla-resultados{
 }
 
 table.tabla-resultados{
-    width:30rem;
+    width:100%;
 }
 
 
 article.tabla-no-centrada{
     width:100%;
     margin:0;
+}
+
+.resultado-tareas{
+    width:100%;
 }
 
 .campo-busqueda{
@@ -229,9 +258,9 @@ article{
 article.tareas{
     flex-direction:row;
     justify-content: space-evenly;
-    border-style: solid;
+    /* border-style: solid;
     border-width: thin;
-    border-radius: 1%;
+    border-radius: 1%; */
     margin: 1rem 1rem;
 }
 
