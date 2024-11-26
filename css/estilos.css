@@ -182,6 +182,7 @@ ul li{
     padding-left:2rem;
     padding-right:2rem;
     border-radius:4%;
+    overflow:scroll;
 }
 
 .label-fecha{
@@ -305,6 +306,10 @@ article.usuarios{
     display:block;
     font-style:bold;
     color:gray;
+}
+
+#icono-mensaje{
+    display:none;
 }
 
 .form-input{

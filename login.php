@@ -14,7 +14,7 @@
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script type="text/javascript" src="./js/busqueda.js"></script>
 
-<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.12.0/css/all.css">
+<!-- <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.12.0/css/all.css"> -->
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <link rel="stylesheet" href="css/estilos.css">
@@ -92,12 +92,13 @@ if(mysqli_num_rows($consulta)!=0){
 							}
 						?>
 
-						<h6>
-							Tiene <?php echo $resultadoMensajesNuevos['cantidad']; ?> 
-							<a href="./mensajes.php" target="_blank">Mensaje<?php echo $plural;?> </a> nuevo<?php echo $plural;?>. 
-							<?php if($resultadoMensajesNuevos['cantidad']>0){
-								?><a href="./mensajes.php" target="_blank"><img src="imagenes/email-static.png" alt="imagen de sobre" class="animacion-mail"></a><?php
-							}?>
+						<h6 id="mensaje-notificacion">
+
+							Tiene <span id="cantidad-mensajes"><?php echo $resultadoMensajesNuevos['cantidad']; ?></span> 
+    						<a id="enlace-mensajes" href="./mensajes.php" target="_blank">Mensaje<?php echo $plural; ?> </a> nuevo<?php echo $plural; ?>. 
+        					<a href="./mensajes.php" target="_blank" id="icono-mensaje"><img src="imagenes/email-static.png" alt="imagen de sobre" class="animacion-mail"></a>
+    						
+
 						</h6>
 
 						<?php
@@ -449,16 +450,39 @@ if(mysqli_num_rows($consulta)!=0){
             url: "ajax/enviarmail.php",
             data:$(this).serialize(),
             success: function(data){
-					alert(data);
-                // if(data === 'exito') {
-				// 	alert('El mensaje se ha enviado con éxito');
-					// $('#formLogin').find('input').val('');
-                // } else {
-                //     alert(data); 
-                // }     
+					alert(data);  
             }});
     });
 
+</script>
+
+<script>
+   function actualizarMensajes() {
+        $.ajax({
+            url: 'ajax/contar_mensajes.php',
+            type: 'POST',
+            data: { idUsuario: <?php echo $idUsuario; ?> },
+            dataType: 'json',
+            success: function(data) {
+                var cantidad = data.cantidad;
+                $('#cantidad-mensajes').text(cantidad);
+                
+                var plural = (cantidad != 1) ? 's' : '';
+                $('#enlace-mensajes').text('Mensaje' + plural);
+                
+                if (cantidad > 0) {
+                    $('#icono-mensaje').show();
+                } else {
+                    $('#icono-mensaje').hide();
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.error("Error en la solicitud AJAX: " + textStatus, errorThrown);
+            }
+        });
+    }
+
+    setInterval(actualizarMensajes, 5000);
 </script>
 
 
