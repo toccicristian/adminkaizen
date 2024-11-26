@@ -403,8 +403,8 @@ if(mysqli_num_rows($consulta)!=0){
 					url: 'ajax/fetchUsers.php', 
 					type: 'POST',
 					data: {
-						mostrareliminados: mostrarEliminados, // Asegúrate de que el nombre coincida
-						busqueda: busqueda // Si necesitas enviar el valor de búsqueda
+						mostrareliminados: mostrarEliminados, 
+						busqueda: busqueda 
 					},
 					success: function(data) {
 						$('#resultadoUsuarios').html(data); 

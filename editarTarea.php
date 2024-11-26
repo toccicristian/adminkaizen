@@ -132,7 +132,7 @@
                                             $nombres[] = $fila['Nombre']; 
                                         }
                                         $usuariosAsignados = implode(", ", $nombres);
-                                        echo $usuariosAsignados;
+                                        echo "<strong>".$usuariosAsignados."</strong>";
                                         mysqli_free_result($consulta);
                                     ?>
                                 </p>
