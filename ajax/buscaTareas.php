@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="css/estilos.css">
 
 <?php
-    include ("conexion.php");
+    include ("../conexion.php");
     
     if (isset($_POST['search'])) {
         $nombreTarea = $_POST['search'];

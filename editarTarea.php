@@ -237,7 +237,7 @@
                     var formData = $(this).serialize(); // Aplasto los datos del formulario
 
                     $.ajax({
-                        url: 'update_notas.php', 
+                        url: 'ajax/update_notas.php', 
                         type: 'POST',
                         data: formData,
                         success: function(response) {
@@ -252,7 +252,7 @@
 
             function loadDocuments() {
                 $.ajax({
-                    url: 'fetch_documents.php', 
+                    url: 'ajax/fetch_documents.php', 
                     type: 'GET',
                     success: function(data) {
                         $('#documentList').html(data); 
@@ -266,7 +266,7 @@
             function deleteDocument(id) {
                 if (confirm("Está seguro de que desea eliminar este documento?")){
                     $.ajax({
-                    url: 'delete_document.php', 
+                    url: 'ajax/delete_document.php', 
                     type: 'POST',
                     data: { id: id },
                     success: function(response) {
