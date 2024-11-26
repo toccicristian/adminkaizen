@@ -216,7 +216,8 @@ ul li{
 }
 
 article.tabla-resultados{
-    width:30rem;
+    /* width:30rem; */
+    width:80%;
     margin:0 auto;
     padding: 10px;
     display:block;
@@ -255,7 +256,7 @@ article.tabla-no-centrada{
 .campo-resultados{
     text-align:left;
     width: auto;
-    border-bottom: 1px solid black;
+    /* border-bottom: 1px solid black; */
     padding: .5rem .3rem;
 }
 
@@ -295,6 +296,16 @@ article.usuarios{
     border-width:thin;
 
 }
+
+
+.tarea-asignacion {
+    width:90%;
+    border-radius: 10px; 
+    margin: 0 auto;
+
+}
+
+
 
 .icono{
     height:2rem;
