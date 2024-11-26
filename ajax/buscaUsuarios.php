@@ -1,5 +1,5 @@
 <?php session_start();
-include("../conexion.php"); // Asegúrate de que la ruta sea correcta
+include("../conexion.php"); 
 
 if (isset($_POST['search'])) {
 

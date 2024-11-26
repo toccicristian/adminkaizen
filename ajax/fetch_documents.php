@@ -1,7 +1,7 @@
 <?php session_start();?>
 
 <?php
-include('conexion.php');
+include('../conexion.php');
 
 if ($conexion->connect_error) {
     die("Conexión fallida: " . $conexion->connect_error);

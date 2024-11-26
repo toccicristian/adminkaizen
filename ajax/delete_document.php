@@ -1,13 +1,12 @@
 <?php session_start();?>
 
 <?php
-include('conexion.php');
+include('../conexion.php');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['id'])) {
         $id = $_POST['id'];
 
-        // Marcar el documento como eliminado
         $stmt = $conexion->prepare("UPDATE DOCUMENTO SET Eliminado = 1 WHERE IdDocumento = ?");
         $stmt->bind_param("i", $id);
         
