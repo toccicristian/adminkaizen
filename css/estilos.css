@@ -189,6 +189,12 @@ ul li{
     width:6rem;
 }
 
+.area-documentos{
+    flex-direction:column;
+    row-gap:2rem;
+}
+
+
 .gestion-usuarios{
     width:35rem;
     min-height:100%;

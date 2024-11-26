@@ -2,11 +2,11 @@
 
 <?php
 
-include('conexion.php');
+include('../conexion.php');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_FILES['file']) && $_FILES['file']['error'] == 0) {
-        $uploadDir = 'uploads/'; // Directorio donde se guardarán los archivos
+        $uploadDir = '../uploads/'; // Directorio donde se guardarán los archivos
         $uploadFile = $uploadDir . basename($_FILES['file']['name']);
         $detalle = $_POST['detalle'];
         $tarea_id = $_POST['tarea_id'];
