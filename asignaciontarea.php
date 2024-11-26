@@ -137,7 +137,7 @@
 				<p>	
 					<h4>USUARIOS DISPONIBLES</h4>
 
-					<table class="table table-stripped">
+					<table class="table table-stripped" id="tabla-disponibles">
 						<thead class="thead-light">
 							<tr>
 								<th class="campo-resultados">Nombre</th>
@@ -163,11 +163,9 @@
 								<td class="campo-resultados"><?php echo $resultado['Nombre']; ?></td>
 								<td class="campo-resultados"><?php echo $resultado['ROL_Nombre']; ?></td>
 								<td class="campo-resultados">
-									<form action="asignartarea.php" method="post">
-										<input type="hidden" name="taskid" value=<?php echo $idtarea ?>>
-										<input type="hidden" name="userid" value=<?php echo $resultado['IdUsuario'] ?>>
-										<button type="submit" class="btn btn-primary">Asignar</button>
-									</form>
+									<button type="button" class="btn btn-primary asignar" data-taskid="<?php echo $idtarea ?>" data-userid="<?php echo $resultado['IdUsuario'] ?>">
+										Asignar
+									</button>
 								</td>
 							</tr>
 
@@ -182,7 +180,7 @@
 			<article class="tabla-resultados transparencia tareas-asignadas col-md-5 mb-4">
 				<p>	
 					<h4>USUARIOS ASIGNADOS</h4>
-					<table class="table table-stripped">
+					<table class="table table-stripped" id="tabla-asignados">
 						<thead class="thead-light">
 							<tr>
 								<th class="campo-resultados">Nombre</th>
@@ -209,11 +207,9 @@
 								<td class="campo-resultados"><?php echo $resultado['ROL_Nombre']; ?></td>
 								<td class="campo-resultados"><?php echo $resultado['nombreAsignador']; ?></td>
 								<td class="campo-resultados">
-									<form action="desasignartarea.php" method="post">
-										<input type="hidden" name="taskid" value=<?php echo $idtarea ?>>
-										<input type="hidden" name="userid" value=<?php echo $resultado['IdUsuario'] ?>>
-										<button type="submit" class="btn btn-danger">Desasignar</button>
-									</form>
+								<button type="button" class="btn btn-danger desasignar" data-taskid="<?php echo $idtarea ?>" data-userid="<?php echo $resultado['IdUsuario'] ?>">
+									Desasignar
+								</button>
 								</td>
 							</tr>
 
@@ -242,9 +238,56 @@
 
 
 
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> -->
+
+
+<script>
+$(document).ready(function() {
+    // Asignar usuario
+	jQuery(document).on('click', '.asignar', function(){
+        var taskId = $(this).data('taskid');
+        var userId = $(this).data('userid');
+
+        $.ajax({
+            url: 'ajax/asignartarea.php',
+            type: 'POST',
+            data: { taskid: taskId, userid: userId },
+            success: function(response) {
+				// console.log(response); // tuve que debuguear un poco
+				var data = JSON.parse(response); 
+                $('#tabla-disponibles tbody').html(data.disponibles);
+                $('#tabla-asignados tbody').html(data.asignados);
+            },
+            error: function() {
+                alert('Error al asignar el usuario.');
+            }
+        });
+    });
+
+    // Desasignar usuario
+    jQuery(document).on('click', '.desasignar', function() {
+        var taskId = $(this).data('taskid');
+        var userId = $(this).data('userid');
+
+        $.ajax({
+            url: 'ajax/desasignartarea.php',
+            type: 'POST',
+            data: { taskid: taskId, userid: userId },
+            success: function(response) {
+				// console.log(response); // tuve que debuguear un poco
+				var data = JSON.parse(response); 
+                $('#tabla-disponibles tbody').html(data.disponibles);
+                $('#tabla-asignados tbody').html(data.asignados);
+            },
+            error: function() {
+                alert('Error al desasignar el usuario.');
+            }
+        });
+    });
+});
+</script>
 
 
 
