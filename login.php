@@ -122,38 +122,29 @@ if(mysqli_num_rows($consulta)!=0){
 		$idrol_max=mysqli_fetch_array($consulta_idrol_max);
 		?>
 		<div id="usuarios" class="tab-content area-usuarios">
-		<?php
-
+			<div class="gestion-usuarios">
+			<?php			
 			if((int)$_SESSION['idrol']<(int)$idrol_max['max_idrol']){
-				?>
-						<div class="gestion-usuarios">
-							<h3 class='centrado'>GESTIÓN DE USUARIOS</h3>
-							<!-- <button type="button" class="btn btn-outline-primary mx-4" data-toggle="modal" data-target="#altaModal">	 -->
-							<button type="button" class="btn btn-primary mx-4" data-toggle="modal" data-target="#altaModal">	
-									Alta de Empleado
-							</button>
-
-							<section class="busqueda-usuarios">				
-								<article class="usuarios">
-									<p class="campo-busqueda">
-										<input type="text" id="busquedaUsuarios" class="search-input" placeholder="Nombre de usuario a buscar" />
-										<label for="mostrareliminados"><input type="checkbox" id="mostrareliminados" name="mostrareliminados">Mostrar eliminados</label>
-									</p>
-									<div class="resultadoUsuarios" id="resultadoUsuarios"></div>
-								</article>
-							</section>
-
-
-
-						</div>
-
-
-				<?php
-			}
-
 			?>
+						
+				<h3 class='centrado'>GESTIÓN DE USUARIOS</h3>
+				<button type="button" class="btn btn-primary mx-4" data-toggle="modal" data-target="#altaModal">	
+						Alta de Empleado
+				</button>
 
-
+			<?php
+			}
+			?>
+				<section class="busqueda-usuarios">				
+					<article class="usuarios">
+						<p class="campo-busqueda">
+							<input type="text" id="busquedaUsuarios" class="search-input" placeholder="Nombre de usuario a buscar" />
+							<label for="mostrareliminados"><input type="checkbox" id="mostrareliminados" name="mostrareliminados">Mostrar eliminados</label>
+						</p>
+						<div class="resultadoUsuarios" id="resultadoUsuarios"></div>
+					</article>
+				</section>
+			</div>
 		</div>
 
 		<div id="tareas" class="tab-content area-tareas" style="display: none;">		
@@ -162,15 +153,11 @@ if(mysqli_num_rows($consulta)!=0){
 				<article class="tareas">
 					<ul>
 						<li>
-							<!-- <h4>Tareas asignadas</h4> 
-							<ul class="transparencia tareas-asignadas">
-								<li> -->
-									<form action="tareasAsignadas.php" method="post" target="_blank" class="boton-con-check transparencia tareas-asignadas">
+							<form action="tareasAsignadas.php" method="post" target="_blank" class="boton-con-check transparencia tareas-asignadas">
 
-										<input class="btn btn-primary mx4" type="submit" value="Consultar Tareas asignadas..."/>
-										<!-- <input class="inline-form-button" type="submit" value="Consultar Tareas asignadas..."/> -->
-										<label for="solosincompletar"><input type="checkbox" name="solosincompletar">Sólo sin Completar</label>
-									</form>
+								<input class="btn btn-primary mx4" type="submit" value="Consultar Tareas asignadas..."/>
+								<label for="solosincompletar"><input type="checkbox" name="solosincompletar">Sólo sin Completar</label>
+							</form>
 								<!-- </li> -->
 
 								<!-- SOLO MOSTRAR EL SIGUIENTE ITEM SI LAS TAREAS ASIGNADAS >0 -->
@@ -194,7 +181,6 @@ if(mysqli_num_rows($consulta)!=0){
 								<ul>
 									<li>
 										<input type="text" name='taskname' class="form-control" placeholder="Nombre de la tarea" aria-label="Tarea" aria-describedby="basic-addon1" required>
-										<!-- <label for="taskstart">Nombre:<input type="text" maxlength=50 placeholder="Nombre de tarea" name="taskname" required /></label> -->
 									</li>
 									<li>
 										<label for="taskstart" class="label-fecha">Inicio </label>
@@ -208,8 +194,7 @@ if(mysqli_num_rows($consulta)!=0){
 										<label for="taskstart" class="label-fecha">Peor Fin </label>
 										<input type="date" name="taskworstend" required />
 									</li>
-									<p><textarea maxlength=255 rows="5" cols="40" placeholder="Notas adicionales..." name="tasknotes" ></textarea></p>
-									<!-- <input class="inline-form-button" type="submit" value="Crear tarea"/> -->
+									<p><textarea maxlength=255 rows="5" cols="40" placeholder="Notas adicionales..." name="tasknotes" ></textarea></p>									
 									<input class="btn btn-primary mx4" type="submit" value="Crear tarea"/>
 									
 								</ul>
