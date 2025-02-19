@@ -1,19 +1,5 @@
-<?php session_start();?>
-<!doctype html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>Eliminación de tarea</title>
-</head>
-
-<body>
-
-<?php
-
-
-	include("conexion.php");
-
-
+<?php session_start();
+include("conexion.php");
 	$username = $_SESSION['nombre'];
 
 	$consulta = mysqli_query($conexion, "SELECT IdUsuario FROM USUARIO WHERE Nombre = '$username'");
@@ -51,12 +37,6 @@
 	}else{
 		$_SESSION['mensajesistema']="La tarea no se ha podido eliminar debido a que no existe o que ya habia sido eliminada.";	
 	}
-
 	header("Location:./login.php");
 	exit();
-	
-?>	
-    
-
-</body>
-</html>
+?>

@@ -1,3 +1,8 @@
 <?php
-    $conexion = mysqli_connect("localhost","root","", "adminkaizen") or die ('No se pudo conectar a la base de datos, por favor comuníquese con el administrador del sistema');
+	$dbhost = 'localhost';
+	$dbuser = 'root';
+	$dbpass = '';
+	$dbname = 'adminkaizen';
+
+	$conexion = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname) or die ('Ocurrio un error al conectarse al servidor mysql');
 ?>

@@ -36,6 +36,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 				$email=$_SESSION['email'];
 				$cuerpoMensaje="Nombre: ".$nombre." Email: ".$email." Mensaje: ".$mensaje;
 				$header="From: ".$nombre."<".$email.">";
+
+				/*
 				$enviado = mail($destinatario,$asunto,$cuerpoMensaje,$header);
 
 				if($enviado == true){
@@ -44,6 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 					$r=$r.", pero no se ha logrado enviar el email";
 				}
 				$r=$r.".";
+				*/
 
                 echo $r;
             } else {
