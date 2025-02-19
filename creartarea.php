@@ -1,19 +1,6 @@
-<?php session_start();?>
-<!doctype html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>Alta de tarea</title>
-</head>
-
-<body>
-
-<?php
-
-
-	include("conexion.php");
-
-
+<?php 
+session_start();
+include("conexion.php");
 	$username = $_SESSION['nombre'];
 	$consulta = mysqli_query($conexion, "SELECT IdUsuario FROM USUARIO WHERE Nombre = '$username'");
 	$resultado = mysqli_fetch_array($consulta);
@@ -51,8 +38,4 @@
 	header("Location:./login.php");
 	exit();
 	
-?>	
-    
-
-</body>
-</html>
+?>

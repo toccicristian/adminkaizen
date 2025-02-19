@@ -1,3 +1,10 @@
 <?php
-    $conexion = mysqli_connect("localhost","root","", "adminkaizen") or die ('No se pudo conectar a la base de datos, por favor comuníquese con el administrador del sistema');
+
+	$dbhost = 'localhost';
+	$dbuser = 'c2770751_db1';
+	$dbpass = 'susuwoKE73';
+	$dbname = 'c2770751_db1';
+
+	$conexion = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname) or die ('Ocurrio un error al conectarse al servidor mysql');
+	//mysql_select_db($dbname);
 ?>
