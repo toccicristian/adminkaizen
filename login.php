@@ -156,7 +156,7 @@ if(mysqli_num_rows($consulta)!=0){
 							<form action="tareasAsignadas.php" method="post" target="_blank" class="boton-con-check transparencia tareas-asignadas">
 
 								<input class="btn btn-primary mx4" type="submit" value="Consultar Tareas asignadas..."/>
-								<label for="solosincompletar"><input type="checkbox" name="solosincompletar">Sólo sin Completar</label>
+								<label for="solosincompletar"><input type="checkbox" name="solosincompletar" checked>Sólo sin Completar</label>
 							</form>
 								<!-- </li> -->
 
