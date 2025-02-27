@@ -166,10 +166,12 @@
 				<aside class="busqueda-tareas">
 
 				<h4>Búsqueda de Tareas</h4>
-					<div class="transparencia tareas-asignadas">						
-						<button type="button" class="btn btn-primary mx-4" data-toggle="modal" data-target="#crearTareaModal">	
-							Nueva Tarea...
-						</button>
+					<div class="transparencia tareas-asignadas">
+						<div class="container d-flex justify-content-end">
+							<button type="button" class="btn btn-primary mx-4" data-toggle="modal" data-target="#crearTareaModal">	
+								Nueva Tarea...
+							</button>
+						</div>						
 						<div class="boton-con-check">
 							<input type="text" id="busquedaTareas" placeholder="Nombre de la tarea" />
 							<label for="mostrareliminadas"><input type="checkbox" id="mostrareliminadas" name="mostrareliminadas">Mostrar eliminadas</label>
@@ -348,7 +350,7 @@
 	}
 
 	document.addEventListener('DOMContentLoaded', function() {
-		showSection('usuarios');
+		showSection('tareas');
 	});
 </script>
 
