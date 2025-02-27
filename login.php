@@ -158,49 +158,18 @@
 					
 						<!-- </ul> -->
 					</li>
-
-					<!-- SOLO MOSTRAR SI  $_SESSION['idrol']<5-->
-					<?php
-						if ($_SESSION['idrol'] < $idrol_max['max_idrol']){
-					?>	
-					<li><h4>Nueva Tarea</h4>
-						<form action="creartarea.php" method="post" class="transparencia tareas-asignadas">
-							<ul>
-								<li>
-									<input type="text" name='taskname' class="form-control" placeholder="Nombre de la tarea" aria-label="Tarea" aria-describedby="basic-addon1" required>
-								</li>
-								<li>
-									<label for="taskstart" class="label-fecha">Inicio </label>
-									<input type="date" name="taskstart" required />
-								</li>
-								<li>
-									<label for="taskstart" class="label-fecha">Mejor Fin </label>
-									<input type="date" name="taskbestend" required />
-								</li>
-								<li>
-									<label for="taskstart" class="label-fecha">Peor Fin </label>
-									<input type="date" name="taskworstend" required />
-								</li>
-								<p><textarea maxlength=255 rows="5" cols="40" placeholder="Notas adicionales..." name="tasknotes" ></textarea></p>									
-								<input class="btn btn-primary mx4" type="submit" value="Crear tarea"/>
-								
-							</ul>
-						</form>
-					</li>
-					<?php }
-					?>
 				</ul>
 				<!-- SOLO MOSTRAR SI  $_SESSION['idrol']<5-->
 				<?php
 					if ($_SESSION['idrol'] < $idrol_max['max_idrol']){
 				?>	
 				<aside class="busqueda-tareas">
-					<button type="button" class="btn btn-primary mx-4" data-toggle="modal" data-target="#crearTareaModal">	
-						Nueva Tarea...
-					</button>
 
-					<h4>Búsqueda de Tareas</h4>
-					<div class="transparencia tareas-asignadas">
+				<h4>Búsqueda de Tareas</h4>
+					<div class="transparencia tareas-asignadas">						
+						<button type="button" class="btn btn-primary mx-4" data-toggle="modal" data-target="#crearTareaModal">	
+							Nueva Tarea...
+						</button>
 						<div class="boton-con-check">
 							<input type="text" id="busquedaTareas" placeholder="Nombre de la tarea" />
 							<label for="mostrareliminadas"><input type="checkbox" id="mostrareliminadas" name="mostrareliminadas">Mostrar eliminadas</label>
@@ -347,45 +316,7 @@
 			</div>
 		</div>
 	</div>									
-<!--
-	<div class="modal fade" id="crearTareaModal" tabindex="-1" role="dialog" aria-labelledby="crearTareaModalLabel" aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="crearTareaModalLabel">Crear Tarea</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-      			<div class="modal-body">
-					<form id="crearTareaForm">
-						<div class="form-group">
-							<label for="tarea-name" class="col-form-label">Nombre de la Tarea:</label>
-							<div id="tarea-name"></div>
-							<input type="text" class="form-control" id="tarea-name" name="nombretarea">
-						</div>
-						<div class="form-group">
-							<label for="task-startdate" class="col-form-label">Fecha de Inicio:</label>
-							<input type="text" class="form-control" id="task-startdate" name="startdate"></textarea>
-						</div>
-						<div class="form-group">
-							<label for="task-enddate" class="col-form-label">Fecha de Fin:</label>
-							<input type="text" class="form-control" id="task-enddate" name="enddate"></textarea>
-						</div>
-						<div class="form-group">
-							<label for="task-notes" class="col-form-label">Notas Adicionales:</label>
-							<textarea class="form-control" id="task-notes" name="notes"></textarea>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-							<button type="submit" class="btn btn-primary">Crear</button>
-						</div>
-					</form>
-    			</div>
-    		</div>
-		</div>
-	</div>
--->
+
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -398,7 +329,6 @@
 
 }else{
 		header("Location:./logout.php");
-		// include ("form_login.php");
 }
 
 ?>
@@ -552,7 +482,7 @@ $(document).on('submit', '#crearTareaForm', function(e) {
         data: $(this).serialize(),
         success: function(data) {
             alert(data);
-            $('#crearTareaModal').modal('hide'); // Cierra el modal después de crear la tarea
+            $('#crearTareaModal').modal('hide'); 
             // Aquí puedes agregar lógica para actualizar la lista de tareas si es necesario
         },
         error: function() {
@@ -561,20 +491,6 @@ $(document).on('submit', '#crearTareaForm', function(e) {
     });
 });
 
-
-/*
-    $(document).on('submit','#crearTareaForm',function(e){
-        e.preventDefault();
-   
-        $.ajax({
-            method:"POST",
-            url: "ajax/crear_tarea.php",
-            data:$(this).serialize(),
-            success: function(data){
-					alert(data);  
-            }});
-    });
-*/
 </script>
 
 
